@@ -20,7 +20,6 @@ const servicePhotos = {
     treatment: 'https://i.pinimg.com/1200x/9f/48/d9/9f48d9b47bc4cc686520ec8acc13fda3.jpg'
 };
 
-// Открытие модального окна с фото услуги
 function openServicePhoto(serviceId) {
     const modal = document.getElementById('servicePhotoModal');
     const title = document.getElementById('photoModalTitle');
@@ -46,7 +45,6 @@ function openServicePhoto(serviceId) {
     document.body.style.overflow = 'hidden';
 }
 
-// Закрытие модального окна с фото
 function closeServicePhotoModal() {
     const modal = document.getElementById('servicePhotoModal');
     if (modal) {
@@ -55,7 +53,6 @@ function closeServicePhotoModal() {
     }
 }
 
-// Кнопки "Подробнее" для услуг
 function initServiceButtons() {
     const detailButtons = document.querySelectorAll('.service-detail-btn');
     
@@ -91,31 +88,29 @@ function initServiceButtons() {
     });
 }
 
-// Данные для советов профессионалов
 const tipsData = {
     1: {
         title: 'Как правильно выбрать расчёску?',
         photo: 'https://sun9-65.userapi.com/impg/nokpBdl9Dgwz5kPnQaL72PxHw_iviRvYDbR8dw/RiEhMfAa078.jpg?size=2160x2160&quality=96&sign=b9d33be0614fa4d4eb72bf779b512f8a&type=album',
-        content: '<h3>Основные правила выбора расчёски</h3><p>Расчёска подбирается исходя из типа кожи головы, длины и толщины волос.</p><h4>Виды расчёсок:</h4><ul><li><strong>Массажная щётка</strong> — сочетает расчёсывание и массаж, улучшает кровообращение и рост волос.</li><li><strong>Для длинных волос</strong> — выбирайте большую расчёску комфортной формы с редкими зубьями.</li><li><strong>Для густых и непослушных волос</strong> — щётка с толстыми редкими зубчиками.</li><li><strong>Для тонких волос</strong> — щётка с тонкими частыми зубчиками.</li><li><strong>Для укладки</strong> — помогает сделать причёску устойчивой к погодным условиям.</li></ul><p>Расчёска должна быть из качественного материала — от этого зависит здоровье волос и кожи головы.</p>'
+        content: '<h3>Основные правила выбора расчёски</h3><p>Расчёска подбирается исходя из типа кожи головы, длины и толщины волос.</p><h4>Виды расчёсок:</h4><ul><li><strong>Массажная щётка</strong> — сочетает расчёсывание и массаж</li><li><strong>Для длинных волос</strong> — с редкими зубьями</li><li><strong>Для густых волос</strong> — щётка с толстыми редкими зубчиками</li><li><strong>Для тонких волос</strong> — щётка с тонкими частыми зубчиками</li></ul>'
     },
     2: {
         title: 'Как сохранить волосы здоровыми?',
         photo: 'https://sun9-24.userapi.com/s/v1/ig2/qPHVbC4KRKlqeuxuom7ZBcMvcyeiecXc5U5HP1FuBjULamrVv6Jrcq-xEBkDj5my1SVaXSk83YbdS_DLEeAixBCi.jpg?quality=96&as=32x32,48x48,72x72,108x108,160x160,240x240,360x360,480x480,540x540,640x640,720x720,1080x1080,1280x1280,1440x1440,2160x2160&from=bu&cs=640x0',
-        content: '<h3>ТОП-5 советов для красивых и здоровых волос</h3><ol><li><strong>Принимайте витамины</strong> — A, группы B, C, E, PP восполняют дефицит и улучшают состояние волос.</li><li><strong>Увлажняйте волосы и кожу головы</strong> — пейте больше воды, используйте деликатные шампуни и бальзамы-кондиционеры.</li><li><strong>Используйте индивидуальный уход</strong> — маски, бальзамы, шампуни устраняют сухость, сечение, тусклость.</li><li><strong>Минимизируйте стресс и откажитесь от вредных привычек</strong> — стресс, курение и алкоголь ухудшают рост волос.</li><li><strong>Пейте больше воды</strong> — при секущихся, тусклых и выпадающих волосах проверьте питьевой режим.</li></ol>'
+        content: '<h3>ТОП-5 советов для красивых волос</h3><ol><li>Принимайте витамины A, B, C, E</li><li>Увлажняйте волосы и кожу головы</li><li>Используйте индивидуальный уход</li><li>Минимизируйте стресс</li><li>Пейте больше воды</li></ol>'
     },
     3: {
         title: 'Что портит наши волосы?',
         photo: 'https://sun9-82.userapi.com/s/v1/ig2/4ln4GCO62b5QZ6BvzpazzHMfbzCYLhycm9ZPjAARllPM5I_Kdz5j_5zJbsgSsIN4Z2jX6Dh0Sh9h9oEQoVz7orKK.jpg?quality=96&as=32x32,48x48,72x72,108x108,160x160,240x240,360x360,480x480,540x540,640x640,720x720,1080x1080,1280x1280,1440x1440,2160x2160&from=bu&cs=640x0',
-        content: '<h3>Основные факторы повреждения волос</h3><ul><li><strong>Механическое воздействие</strong> — скручивание мокрых волос, растирание полотенцем.</li><li><strong>Тепловое воздействие</strong> — использование плойки, утюжка без термозащиты.</li><li><strong>Химическое воздействие</strong> — окрашивание, осветление, кератин, ботокс, нанопластика.</li><li><strong>UV-лучи</strong> — летом защищайте волосы головным убором.</li><li><strong>Хлорированная вода в бассейне</strong> — после купания мойте голову с шампунем и маской.</li><li><strong>Солёная морская вода</strong> — также требует обязательного смывания.</li></ul><p>Берегите волосы и защищайте их от вредных факторов. Правильно подобранный домашний уход поможет восстановить повреждения.</p>'
+        content: '<h3>Основные факторы повреждения волос</h3><ul><li><strong>Механическое воздействие</strong> — скручивание мокрых волос</li><li><strong>Тепловое воздействие</strong> — утюжок, плойка без термозащиты</li><li><strong>Химическое воздействие</strong> — окрашивание, осветление</li><li><strong>UV-лучи</strong> — защищайте головным убором</li><li><strong>Хлорированная вода</strong> — после бассейна мойте голову</li></ul>'
     },
     4: {
         title: 'Как часто нужно стричь волосы?',
         photo: 'https://sun9-46.userapi.com/impg/oetiTCQOAE08vSEGCf-NaDVBUzX0xwbpFhHxig/Fa80VtI8brQ.jpg?size=2160x2160&quality=96&sign=dbeb6ea8542e3ff904214da1b4bd669b&type=album',
-        content: '<h3>Рекомендации по частоте стрижки</h3><ul><li><strong>Короткие стрижки</strong> — каждые 1,5–2 месяца для поддержания формы.</li><li><strong>Волосы средней длины (до плеч)</strong> — раз в 3 месяца. Ровный срез требует более частого обновления.</li><li><strong>Длинные волосы</strong> — раз в 3 месяца подстригайте кончики для аккуратного вида. Секущиеся концы лечатся только стрижкой.</li></ul><p>Регулярная стрижка — залог здорового и ухоженного вида волос.</p>'
+        content: '<h3>Рекомендации по частоте стрижки</h3><ul><li><strong>Короткие стрижки</strong> — каждые 1,5–2 месяца</li><li><strong>Средняя длина</strong> — раз в 3 месяца</li><li><strong>Длинные волосы</strong> — раз в 3 месяца подстригайте кончики</li></ul><p>Регулярная стрижка — залог здорового вида волос.</p>'
     }
 };
 
-// Открытие модального окна с советом
 function openGostTip(tipId) {
     const tip = tipsData[tipId];
     if (!tip) return;
@@ -128,7 +123,6 @@ function openGostTip(tipId) {
     document.body.style.overflow = 'hidden';
 }
 
-// Закрытие модального окна с советом
 function closeGostModal() {
     const modal = document.getElementById('gostModal');
     if (modal) {
@@ -137,7 +131,6 @@ function closeGostModal() {
     }
 }
 
-// Кнопки "Подробнее" для советов
 function initTipsButtons() {
     document.querySelectorAll('.tip-gost-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
@@ -148,7 +141,6 @@ function initTipsButtons() {
     });
 }
 
-// Форма онлайн-записи
 function initBookingForm() {
     const form = document.getElementById('booking-form');
     if (!form) return;
@@ -211,12 +203,10 @@ function initBookingForm() {
     });
 }
 
-// Бургер-меню (современный вариант)
 function initBurgerMenu() {
     const burger = document.getElementById('burgerMenu');
     const nav = document.getElementById('navLinks');
     
-    // Создаём оверлей, если его нет
     let overlay = document.getElementById('menuOverlay');
     if (!overlay) {
         overlay = document.createElement('div');
@@ -257,7 +247,6 @@ function initBurgerMenu() {
         link.addEventListener('click', closeMenu);
     });
     
-    // Закрытие по Escape
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && nav.classList.contains('active')) {
             closeMenu();
@@ -265,7 +254,6 @@ function initBurgerMenu() {
     });
 }
 
-// Шапка при скролле
 function initHeaderVisibility() {
     const header = document.getElementById('mainHeader');
     if (!header) return;
@@ -288,7 +276,6 @@ function initHeaderVisibility() {
     });
 }
 
-// Бегущая строка
 function initMarqueeVisibility() {
     const marquee = document.getElementById('fixedMarquee');
     if (!marquee) return;
@@ -306,7 +293,6 @@ function initMarqueeVisibility() {
     }, 1000);
 }
 
-// Слайдер отзывов
 function initReviewsSlider() {
     const track = document.getElementById('reviewsTrack');
     const prev = document.getElementById('prevReviewBtn');
@@ -375,7 +361,6 @@ function initReviewsSlider() {
     update();
 }
 
-// Плавный скролл по якорям
 function initSmoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
@@ -390,9 +375,7 @@ function initSmoothScroll() {
     });
 }
 
-// Закрытие модальных окон по клику вне
 function initModalsClose() {
-    // Закрытие по крестику
     document.querySelectorAll('.close-gost, .close-photo, .close-modal').forEach(btn => {
         btn.addEventListener('click', () => {
             if (btn.classList.contains('close-gost')) closeGostModal();
@@ -400,19 +383,14 @@ function initModalsClose() {
         });
     });
     
-    // Закрытие по клику вне модального окна
     window.addEventListener('click', (event) => {
         const gostModal = document.getElementById('gostModal');
         const serviceModal = document.getElementById('servicePhotoModal');
-        const reviewModal = document.getElementById('reviewPhotoModal');
-        
         if (event.target === gostModal) closeGostModal();
         if (event.target === serviceModal) closeServicePhotoModal();
-        if (event.target === reviewModal) closeReviewPhotoModal();
     });
 }
 
-// Увеличение фото отзывов
 function initReviewImageZoom() {
     const clickableImages = document.querySelectorAll('.review-img-clickable');
     const modal = document.getElementById('reviewPhotoModal');
@@ -451,7 +429,6 @@ function initReviewImageZoom() {
     });
 }
 
-// Запуск всех функций при загрузке страницы
 document.addEventListener('DOMContentLoaded', () => {
     initServiceButtons();
     initTipsButtons();
