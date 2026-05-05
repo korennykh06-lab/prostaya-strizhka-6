@@ -194,24 +194,57 @@ function initBookingForm() {
     });
 }
 
-// Бургер-меню
+// Бургер-меню (современный вариант)
 function initBurgerMenu() {
     const burger = document.getElementById('burgerMenu');
     const nav = document.getElementById('navLinks');
+    
+    // Создаём оверлей, если его нет
+    let overlay = document.getElementById('menuOverlay');
+    if (!overlay) {
+        overlay = document.createElement('div');
+        overlay.id = 'menuOverlay';
+        overlay.className = 'menu-overlay';
+        document.body.appendChild(overlay);
+    }
+    
     if (!burger || !nav) return;
+    
+    function closeMenu() {
+        burger.classList.remove('active');
+        nav.classList.remove('active');
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+        document.body.classList.remove('menu-open');
+    }
+    
+    function openMenu() {
+        burger.classList.add('active');
+        nav.classList.add('active');
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        document.body.classList.add('menu-open');
+    }
+    
     burger.addEventListener('click', () => {
-        burger.classList.toggle('active');
-        nav.classList.toggle('active');
-        document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : '';
-        document.body.classList.toggle('menu-open');
+        if (nav.classList.contains('active')) {
+            closeMenu();
+        } else {
+            openMenu();
+        }
     });
+    
+    overlay.addEventListener('click', closeMenu);
+    
     nav.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-            burger.classList.remove('active');
-            nav.classList.remove('active');
-            document.body.style.overflow = '';
-            document.body.classList.remove('menu-open');
-        });
+        link.addEventListener('click', closeMenu);
+    });
+    
+    // Закрытие по Escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && nav.classList.contains('active')) {
+            closeMenu();
+        }
     });
 }
 
