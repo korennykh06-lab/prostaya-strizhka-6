@@ -296,7 +296,7 @@ header.scrolled .burger-menu span {
     gap: 12px;
 }
 
-/* БУРГЕР-МЕНЮ */
+/* БУРГЕР-МЕНЮ - ИКОНКА */
 .burger-menu {
     display: none;
     flex-direction: column;
@@ -328,7 +328,7 @@ header.scrolled .burger-menu span {
     background: white;
 }
 
-/* Оверлей */
+/* Оверлей (тёмный фон) */
 .menu-overlay {
     position: fixed;
     top: 0;
@@ -347,6 +347,7 @@ header.scrolled .burger-menu span {
     visibility: visible;
 }
 
+/* Навигация - десктоп */
 .nav-links {
     display: flex;
     gap: 25px;
@@ -1586,7 +1587,7 @@ form input:focus, form select:focus, form textarea:focus {
     opacity: 0.8;
 }
 
-/* ========== АДАПТИВНОСТЬ ========== */
+/* ========== АДАПТИВНОСТЬ (ТЕЛЕФОНЫ) ========== */
 @media (max-width: 992px) {
     .container { padding: 0 25px; }
     .brands-list { grid-template-columns: repeat(3, 1fr); }
@@ -1601,24 +1602,24 @@ form input:focus, form select:focus, form textarea:focus {
     
     .burger-menu { display: flex; }
     
-    /* БУРГЕР-МЕНЮ - КОМПАКТНО, ВСЕ ПУНКТЫ БЕЗ ПРОКРУТКИ */
+    /* БУРГЕР-МЕНЮ НА ТЕЛЕФОНЕ - ВО ВСЮ ВЫСОТУ, ВСЕ ПУНКТЫ ВИДНЫ */
     .nav-links {
         position: fixed;
         top: 0;
         right: -100%;
-        width: 280px;
-        height: auto;
-        max-height: 100vh;
+        width: 85%;
+        max-width: 320px;
+        height: 100vh;
         background: #5BA4CF;
         flex-direction: column;
-        align-items: stretch;
+        align-items: center;
         justify-content: center;
-        gap: 0;
+        gap: 12px;
         transition: right 0.3s ease-in-out;
         z-index: 999;
-        padding: 70px 20px 20px;
+        padding: 20px;
         box-shadow: -5px 0 30px rgba(0,0,0,0.3);
-        overflow-y: visible;
+        overflow-y: auto;
     }
     
     .nav-links.active {
@@ -1626,12 +1627,14 @@ form input:focus, form select:focus, form textarea:focus {
     }
     
     .nav-links a {
-        font-size: 0.95rem;
+        font-size: 1.1rem;
         color: white;
-        padding: 10px 0;
+        padding: 12px 15px;
         width: 100%;
         text-align: center;
         border-bottom: 1px solid rgba(255,255,255,0.15);
+        border-radius: 10px;
+        transition: all 0.2s;
     }
     
     .nav-links a:last-child {
@@ -1643,9 +1646,8 @@ form input:focus, form select:focus, form textarea:focus {
     }
     
     .nav-links a:hover {
-        background: rgba(255,255,255,0.1);
-        padding-left: 10px;
-        text-align: left;
+        background: rgba(255,255,255,0.2);
+        transform: scale(1.02);
     }
     
     body.menu-open { overflow: hidden; }
@@ -1699,14 +1701,16 @@ form input:focus, form select:focus, form textarea:focus {
     .trend-img { height: 280px; }
     .tech-image-circle { width: 220px; height: 220px; }
     
-    /* Ещё более компактное меню на очень маленьких экранах */
+    /* Ещё компактнее для маленьких экранов */
     .nav-links {
-        width: 260px;
-        padding: 65px 15px 15px;
+        width: 90%;
+        max-width: 280px;
+        gap: 8px;
+        padding: 15px;
     }
     
     .nav-links a {
-        font-size: 0.85rem;
-        padding: 8px 0;
+        font-size: 1rem;
+        padding: 10px 12px;
     }
 }
