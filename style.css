@@ -296,7 +296,7 @@ header.scrolled .burger-menu span {
     gap: 12px;
 }
 
-/* БУРГЕР-МЕНЮ - ИСПРАВЛЕНО */
+/* БУРГЕР-МЕНЮ - ИСПРАВЛЕНО (скролл внутри) */
 .burger-menu {
     display: none;
     flex-direction: column;
@@ -638,7 +638,7 @@ header.scrolled .burger-menu span {
     color: #2A2A2A;
 }
 
-/* Sterility - СВОЙ ФОН (ТЁМНЫЙ С КАРТИНКОЙ) */
+/* Sterility - СВОЙ ФОН (ТЁМНЫЙ С КАРТИНКОЙ) - ИСПРАВЛЕНО ДЛЯ ТЕЛЕФОНА */
 .sterility-premium {
     position: relative;
     min-height: 100vh;
@@ -657,7 +657,7 @@ header.scrolled .burger-menu span {
     background-image: url('https://i.pinimg.com/1200x/87/b6/ab/87b6abcb094899e854407706eb0fa4f0.jpg');
     background-size: cover;
     background-position: center;
-    background-attachment: fixed;
+    background-attachment: scroll;
     z-index: 0;
 }
 
@@ -1192,7 +1192,7 @@ header.scrolled .burger-menu span {
     opacity: 0.95;
 }
 
-/* Brands - СВОЙ ФОН (ТЁМНЫЙ С КАРТИНКОЙ) */
+/* Brands - СВОЙ ФОН (ТЁМНЫЙ С КАРТИНКОЙ) - ИСПРАВЛЕНО ДЛЯ ТЕЛЕФОНА */
 .brands-fullscreen {
     position: relative;
     padding: 60px 0;
@@ -1208,7 +1208,7 @@ header.scrolled .burger-menu span {
     background-image: url('https://i.pinimg.com/1200x/dc/52/41/dc5241da5ffc067b5c588c4b835263d2.jpg');
     background-size: cover;
     background-position: center;
-    background-attachment: fixed;
+    background-attachment: scroll;
     z-index: 0;
 }
 
@@ -1218,7 +1218,7 @@ header.scrolled .burger-menu span {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.75);
+    background: rgba(0, 0, 0, 0.8);
     z-index: 1;
 }
 
@@ -1554,7 +1554,7 @@ form input:focus, form select:focus, form textarea:focus {
     opacity: 0.8;
 }
 
-/* Responsive */
+/* ========== АДАПТИВНОСТЬ С ИСПРАВЛЕНИЯМИ ========== */
 @media (max-width: 992px) {
     .container { padding: 0 25px; }
     .brands-list { grid-template-columns: repeat(3, 1fr); }
@@ -1569,19 +1569,24 @@ form input:focus, form select:focus, form textarea:focus {
     
     .burger-menu { display: flex; }
     
+    /* БУРГЕР-МЕНЮ - ИСПРАВЛЕНО: теперь прокручивается и видно все пункты */
     .nav-links {
         position: fixed;
         top: 0;
         right: -100%;
-        width: 75%;
+        width: 85%;
+        max-width: 320px;
         height: 100vh;
         background: #5BA4CF;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
-        gap: 20px;
-        transition: right 0.3s;
+        justify-content: flex-start;
+        gap: 15px;
+        transition: right 0.3s ease-in-out;
         z-index: 100;
+        padding: 100px 20px 40px;
+        overflow-y: auto;
+        box-shadow: -5px 0 30px rgba(0,0,0,0.3);
     }
     
     .nav-links.active { right: 0; }
@@ -1589,7 +1594,10 @@ form input:focus, form select:focus, form textarea:focus {
     .nav-links a {
         font-size: 1.1rem;
         color: white;
-        padding: 10px;
+        padding: 12px;
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px solid rgba(255,255,255,0.2);
     }
     
     .nav-links a::after { display: none; }
@@ -1627,6 +1635,16 @@ form input:focus, form select:focus, form textarea:focus {
     .tech-item { flex-direction: column !important; text-align: center; }
     .tech-content h3:after { left: 50%; transform: translateX(-50%); }
     .tech-image-circle { width: 300px; height: 300px; }
+    
+    /* Исправлено: фон стерильности на телефоне */
+    .sterility-bg {
+        background-attachment: scroll;
+    }
+    
+    /* Исправлено: фон брендов на телефоне */
+    .brands-bg {
+        background-attachment: scroll;
+    }
 }
 
 @media (max-width: 480px) {
