@@ -292,7 +292,6 @@ header.scrolled .burger-menu span {
     gap: 12px;
 }
 
-/* ===== БУРГЕР-МЕНЮ - ПРОСТОЙ И НАДЁЖНЫЙ ===== */
 .burger-menu {
     display: none;
     flex-direction: column;
@@ -323,7 +322,6 @@ header.scrolled .burger-menu span {
     background: white;
 }
 
-/* Навигация - десктоп */
 .nav-links {
     display: flex;
     gap: 25px;
@@ -1494,6 +1492,18 @@ form input:focus, form select:focus, form textarea:focus {
     width: 24px;
 }
 
+/* Кликабельные ссылки в подвале */
+.footer-contact-item a {
+    color: white;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+
+.footer-contact-item a:hover {
+    opacity: 0.8;
+    text-decoration: underline;
+}
+
 .footer-social {
     display: flex;
     flex-direction: column;
@@ -1549,7 +1559,6 @@ form input:focus, form select:focus, form textarea:focus {
     opacity: 0.8;
 }
 
-/* ===== АДАПТИВ ДЛЯ ТЕЛЕФОНОВ ===== */
 @media (max-width: 992px) {
     .container { padding: 0 25px; }
     .brands-list { grid-template-columns: repeat(3, 1fr); }
@@ -1564,7 +1573,6 @@ form input:focus, form select:focus, form textarea:focus {
     
     .burger-menu { display: flex; }
     
-    /* Меню на телефоне */
     .nav-links {
         position: fixed;
         top: 0;
