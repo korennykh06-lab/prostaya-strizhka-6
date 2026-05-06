@@ -1678,3 +1678,22 @@ form input:focus, form select:focus, form textarea:focus {
     .trend-img { height: 280px; }
     .tech-image-circle { width: 220px; height: 220px; }
 }
+/* Убираем перехват кликов */
+.nav-links {
+    pointer-events: auto;
+}
+
+.nav-links a {
+    pointer-events: auto !important;
+    z-index: 10001;
+    position: relative;
+    cursor: pointer !important;
+}
+
+.menu-overlay {
+    pointer-events: none;
+}
+
+.menu-overlay.active {
+    pointer-events: auto;
+}
