@@ -72,7 +72,6 @@ function initBurgerMenu() {
         }
     };
     
-    // Закрытие при клике на пункт меню
     const links = nav.querySelectorAll('a');
     for (let i = 0; i < links.length; i++) {
         links[i].onclick = function() {
@@ -159,15 +158,94 @@ function initTipsButtons() {
     }
 }
 
-// ========== ФОРМА ==========
+// ========== ФОРМА С ВАЛИДАЦИЕЙ ==========
 function initBookingForm() {
     const form = document.getElementById('booking-form');
     if (!form) return;
     
+    const nameInput = document.getElementById('userName');
+    const phoneInput = document.getElementById('userPhone');
+    
+    // Валидация имени: только буквы, пробелы и дефисы
+    if (nameInput) {
+        nameInput.addEventListener('input', function() {
+            this.value = this.value.replace(/[^a-zA-Zа-яА-ЯёЁ\s\-]/g, '');
+        });
+    }
+    
+    // Валидация телефона: автоматическое форматирование +7 и 10 цифр
+    if (phoneInput) {
+        phoneInput.addEventListener('input', function(e) {
+            let value = this.value.replace(/\D/g, '');
+            
+            if (value.length === 0) {
+                this.value = '+7';
+                return;
+            }
+            
+            if (!value.startsWith('7')) {
+                value = '7' + value;
+            }
+            
+            if (value.length > 11) {
+                value = value.substring(0, 11);
+            }
+            
+            let formatted = '+7';
+            if (value.length > 1) {
+                formatted += ' ' + value.substring(1, 4);
+            }
+            if (value.length > 4) {
+                formatted += ' ' + value.substring(4, 7);
+            }
+            if (value.length > 7) {
+                formatted += ' ' + value.substring(7, 9);
+            }
+            if (value.length > 9) {
+                formatted += ' ' + value.substring(9, 11);
+            }
+            
+            this.value = formatted.trim();
+        });
+        
+        phoneInput.addEventListener('focus', function() {
+            if (!this.value || this.value === '') {
+                this.value = '+7 ';
+            }
+        });
+    }
+    
     form.addEventListener('submit', function(e) {
         e.preventDefault();
-        alert('Спасибо! Мы скоро свяжемся с вами.');
-        form.reset();
+        
+        let isValid = true;
+        let errorMessage = '';
+        
+        // Проверка имени
+        const name = nameInput ? nameInput.value.trim() : '';
+        if (!name) {
+            errorMessage += '• Введите имя\n';
+            isValid = false;
+        } else if (/[0-9]/.test(name)) {
+            errorMessage += '• Имя не должно содержать цифры\n';
+            isValid = false;
+        }
+        
+        // Проверка телефона
+        const phone = phoneInput ? phoneInput.value.trim() : '';
+        const phoneDigits = phone.replace(/\D/g, '');
+        if (!phone || phoneDigits.length !== 11 || !phoneDigits.startsWith('7')) {
+            errorMessage += '• Введите корректный номер телефона (+7 XXX XXX XX XX)\n';
+            isValid = false;
+        }
+        
+        if (isValid) {
+            alert('Спасибо, ' + name + '! Мы скоро свяжемся с вами.');
+            form.reset();
+            if (phoneInput) phoneInput.value = '+7 ';
+        } else {
+            alert('Пожалуйста, исправьте ошибки:\n' + errorMessage);
+        }
     });
 }
 
