@@ -243,8 +243,21 @@ function initBurgerMenu() {
     
     overlay.addEventListener('click', closeMenu);
     
+    // Кликабельные ссылки в меню - при нажатии закрываем меню и плавно скроллим
     nav.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', closeMenu);
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('href');
+            if (targetId && targetId !== '#') {
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    closeMenu();
+                    setTimeout(() => {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 300);
+                }
+            }
+        });
     });
     
     document.addEventListener('keydown', (e) => {
@@ -362,7 +375,7 @@ function initReviewsSlider() {
 }
 
 function initSmoothScroll() {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    document.querySelectorAll('a[href^="#"]:not(.nav-links a)').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             const href = this.getAttribute('href');
             if (href === '#') return;
