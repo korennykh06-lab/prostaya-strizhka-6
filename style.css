@@ -380,6 +380,60 @@ header.scrolled .nav-links a::after {
     background: white;
 }
 
+/* Мобильное меню - на всю высоту экрана */
+@media (max-width: 768px) {
+    .burger-menu {
+        display: flex;
+    }
+    
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 100%;
+        height: 100vh;
+        background: #5BA4CF;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        transition: right 0.3s ease-in-out;
+        z-index: 999;
+        padding: 20px;
+        overflow-y: auto;
+    }
+    
+    .nav-links.active {
+        right: 0;
+    }
+    
+    .nav-links a {
+        color: white;
+        font-size: 1.3rem;
+        padding: 12px 20px;
+        width: auto;
+        min-width: 180px;
+        text-align: center;
+        border-bottom: 1px solid rgba(255,255,255,0.2);
+        border-radius: 0;
+        display: inline-block;
+    }
+    
+    .nav-links a::after {
+        display: none;
+    }
+    
+    .nav-links a:hover {
+        background: rgba(255,255,255,0.2);
+        border-radius: 40px;
+    }
+    
+    body.menu-open {
+        overflow: hidden;
+    }
+}
+
 .features-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -1579,59 +1633,6 @@ form input:focus, form select:focus, form textarea:focus {
 @media (max-width: 768px) {
     .container { padding: 0 20px; }
     
-    .burger-menu { display: flex; }
-    
-    .nav-links {
-        position: fixed;
-        top: 0;
-        right: -100%;
-        width: 280px;
-        height: 100vh;
-        background: #5BA4CF;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
-        gap: 10px;
-        transition: right 0.3s ease-in-out;
-        z-index: 999;
-        padding: 80px 20px 30px;
-        box-shadow: -5px 0 30px rgba(0,0,0,0.3);
-        overflow-y: auto;
-    }
-    
-    .nav-links.active {
-        right: 0;
-    }
-    
-    .nav-links a {
-        font-size: 1rem;
-        color: white;
-        padding: 12px 15px;
-        width: 100%;
-        text-align: center;
-        border-bottom: 1px solid rgba(255,255,255,0.15);
-        border-radius: 10px;
-        cursor: pointer;
-    }
-    
-    .nav-links a:last-child {
-        border-bottom: none;
-    }
-    
-    .nav-links a::after {
-        display: none;
-    }
-    
-    .nav-links a:hover {
-        background: rgba(255,255,255,0.2);
-    }
-    
-    body.menu-open { overflow: hidden; }
-    
-    .logo-img { height: 40px; }
-    .logo-title { font-size: 1.3rem; }
-    .logo-subtitle { font-size: 0.65rem; }
-    
     .features-grid { grid-template-columns: 1fr; }
     .about-content { flex-direction: column; }
     .services-grid { grid-template-columns: 1fr; }
@@ -1676,15 +1677,4 @@ form input:focus, form select:focus, form textarea:focus {
     .brands-list { grid-template-columns: 1fr; }
     .trend-img { height: 280px; }
     .tech-image-circle { width: 220px; height: 220px; }
-    
-    .nav-links {
-        width: 260px;
-        padding: 70px 15px 20px;
-        gap: 8px;
-    }
-    
-    .nav-links a {
-        font-size: 0.9rem;
-        padding: 10px 12px;
-    }
 }
