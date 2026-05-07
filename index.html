@@ -15,13 +15,15 @@
 
 <header id="mainHeader">
     <div class="container header-content">
-        <div class="logo-container">
-            <img class="logo-img" src="https://avatars.mds.yandex.net/get-altay/2369616/2a000001750e7585d3fc89d30be9c4c4d6e3/S_height" alt="Логотип">
-            <div class="logo-text">
-                <div class="logo-title">ПРОСТО СТРИЖКА</div>
-                <span class="logo-subtitle">экспресс-парикмахерская</span>
+        <a href="#" class="logo-link" id="logoLink">
+            <div class="logo-container">
+                <img class="logo-img" src="https://avatars.mds.yandex.net/get-altay/2369616/2a000001750e7585d3fc89d30be9c4c4d6e3/S_height" alt="Логотип">
+                <div class="logo-text">
+                    <div class="logo-title">ПРОСТО СТРИЖКА</div>
+                    <span class="logo-subtitle">экспресс-парикмахерская</span>
+                </div>
             </div>
-        </div>
+        </a>
         <div class="burger-menu" id="burgerMenu">
             <span></span>
             <span></span>
@@ -47,15 +49,10 @@
     <span>Онлайн-запись</span>
 </a>
 
-<!-- БЕГУЩАЯ СТРОКА -->
-<div class="fixed-marquee" id="fixedMarquee">
-    <div class="marquee-content">
-        <span class="discount-icon">🎁</span><span class="discount-text">СКИДКА 20% НА ПЕРВОЕ ПОСЕЩЕНИЕ!</span><span class="discount-icon">🎁</span><span class="discount-text">СКИДКА 20% НА ПЕРВОЕ ПОСЕЩЕНИЕ!</span><span class="discount-icon">🎁</span><span class="discount-text">СКИДКА 20% НА ПЕРВОЕ ПОСЕЩЕНИЕ!</span><span class="discount-icon">🎁</span><span class="discount-text">СКИДКА 20% НА ПЕРВОЕ ПОСЕЩЕНИЕ!</span><span class="discount-icon">🎁</span><span class="discount-text">СКИДКА 20% НА ПЕРВОЕ ПОСЕЩЕНИЕ!</span><span class="discount-icon">🎁</span><span class="discount-text">СКИДКА 20% НА ПЕРВОЕ ПОСЕЩЕНИЕ!</span><span class="discount-icon">🎁</span><span class="discount-text">СКИДКА 20% НА ПЕРВОЕ ПОСЕЩЕНИЕ!</span><span class="discount-icon">🎁</span><span class="discount-text">СКИДКА 20% НА ПЕРВОЕ ПОСЕЩЕНИЕ!</span>
-    </div>
-</div>
-
 <main>
+    <!-- БАННЕР (ХЕРО) БЕЗ ТЕКСТА -->
     <section class="hero">
+        <div class="hero-overlay"></div>
         <div class="container hero-content"></div>
     </section>
 
@@ -731,6 +728,7 @@
         </div>
     </div>
 
+    <!-- РАЗДЕЛ БРЕНДОВ С ССЫЛКАМИ НА ЗОЛОТОЕ ЯБЛОКО -->
     <section id="brands" class="brands-fullscreen">
         <div class="brands-bg"></div>
         <div class="brands-overlay"></div>
@@ -738,27 +736,18 @@
             <div class="section-header">
                 <h2>БРЕНДЫ С КОТОРЫМИ МЫ РАБОТАЕМ</h2>
                 <div class="section-line"></div>
-                <p class="brands-subtitle">ВЫБИРАЕМ ЛУЧШИЕ ДЛЯ ВАШЕЙ КРАСОТЫ</p>
             </div>
             <div class="brands-list">
-                <div class="brand-name">FarmAulia</div>
-                <div class="brand-name">L'ORÉAL</div>
-                <div class="brand-name">TIGI</div>
-                <div class="brand-name">Morgan's</div>
-                <div class="brand-name">BOY'S TOYS</div>
-                <div class="brand-name">INSIGHT PROFESSIONAL</div>
-                <div class="brand-name">Depillouch®</div>
-                <div class="brand-name">ARAVIA Professional</div>
-                <div class="brand-name">Innen</div>
-                <div class="brand-name">DOMIX®</div>
-                <div class="brand-name">PodiaFarm™</div>
-                <div class="brand-name">RSShine</div>
-                <div class="brand-name">NIPPON</div>
-                <div class="brand-name">MAVIVER</div>
-                <div class="brand-name">BroxWenna</div>
-                <div class="brand-name">DA</div>
-                <div class="brand-name">Doktor Alex</div>
-                <div class="brand-name">4ELANC</div>
+                <a href="https://goldapple.ru/brands/l-oreal-professionnel" target="_blank" rel="noopener noreferrer" class="brand-link">L'ORÉAL PROFESSIONNEL</a>
+                <a href="https://goldapple.ru/brands/aveda-brand" target="_blank" rel="noopener noreferrer" class="brand-link">AVEDA</a>
+                <a href="https://goldapple.ru/brands/davines" target="_blank" rel="noopener noreferrer" class="brand-link">DAVINES</a>
+                <a href="https://goldapple.ru/brands/ollin-professional" target="_blank" rel="noopener noreferrer" class="brand-link">OLLIN PROFESSIONAL</a>
+                <a href="https://goldapple.ru/brands/mise-en-scene" target="_blank" rel="noopener noreferrer" class="brand-link">MISE EN SCENE</a>
+                <a href="https://goldapple.ru/brands/aromatica" target="_blank" rel="noopener noreferrer" class="brand-link">AROMATICA</a>
+                <a href="https://goldapple.ru/brands/matrix" target="_blank" rel="noopener noreferrer" class="brand-link">MATRIX</a>
+                <a href="https://goldapple.ru/brands/brelil" target="_blank" rel="noopener noreferrer" class="brand-link">BRELIL</a>
+                <a href="https://goldapple.ru/brands/selective-professional" target="_blank" rel="noopener noreferrer" class="brand-link">SELECTIVE PROFESSIONAL</a>
+                <a href="https://goldapple.ru/brands/estel" target="_blank" rel="noopener noreferrer" class="brand-link">ESTEL</a>
             </div>
         </div>
     </section>
@@ -820,16 +809,79 @@
                     <input type="text" id="userName" placeholder="Ваше имя" required>
                     <input type="tel" id="userPhone" placeholder="Телефон" required>
                     <select id="userService">
-                        <option>Женская простая стрижка (299 ₽)</option>
-                        <option>Женская архитектурная стрижка (от 600 ₽)</option>
-                        <option>Мужская стрижка машинкой (299 ₽)</option>
-                        <option>Мужская премиум-стрижка (от 500 ₽)</option>
-                        <option>Детская простая стрижка (299 ₽)</option>
-                        <option>Детская модельная стрижка (от 450 ₽)</option>
-                        <option>Окрашивание</option>
-                        <option>Уход</option>
+                        <optgroup label="👩 Женский зал">
+                            <option>Простая стрижка (299 ₽)</option>
+                            <option>Архитектурная стрижка (от 600 ₽)</option>
+                            <option>Пикси (650 ₽)</option>
+                            <option>Боб-каре (650 ₽)</option>
+                            <option>Сессун (700 ₽)</option>
+                            <option>Каскад / Лесенка (600 ₽)</option>
+                            <option>Градуированная стрижка (650 ₽)</option>
+                            <option>Многослойная стрижка (750 ₽)</option>
+                        </optgroup>
+                        <optgroup label="👨 Мужской зал">
+                            <option>Стрижка машинкой (299 ₽)</option>
+                            <option>Премиум-стиль (от 500 ₽)</option>
+                            <option>Fade (градиентная) (600 ₽)</option>
+                            <option>Андеркат (550 ₽)</option>
+                            <option>Полубокс (500 ₽)</option>
+                            <option>Стрижка ножницами (550 ₽)</option>
+                            <option>Текстурная стрижка (600 ₽)</option>
+                            <option>Оформление бороды (200 ₽)</option>
+                        </optgroup>
+                        <optgroup label="👧 Детский зал">
+                            <option>Первая стрижка до 3 лет (299 ₽)</option>
+                            <option>Простая детская 3-7 лет (299 ₽)</option>
+                            <option>Простая детская 7-12 лет (299 ₽)</option>
+                            <option>Модельная детская (450 ₽)</option>
+                            <option>Креативная детская (500 ₽)</option>
+                            <option>Стрижка с узором (500 ₽)</option>
+                            <option>Подростковая сложная (550 ₽)</option>
+                        </optgroup>
+                        <optgroup label="🎨 Окрашивание">
+                            <option>Один тон — короткие (3 400 ₽)</option>
+                            <option>Один тон — средние (4 100 ₽)</option>
+                            <option>Один тон — длинные (5 300 ₽)</option>
+                            <option>Мелирование — короткие (2 500 ₽)</option>
+                            <option>Мелирование — средние (3 000 ₽)</option>
+                            <option>Мелирование — длинные (4 000 ₽)</option>
+                            <option>AirTouch — короткие (5 500 ₽)</option>
+                            <option>AirTouch — средние (6 500 ₽)</option>
+                            <option>AirTouch — длинные (8 500 ₽)</option>
+                            <option>Шатуш — короткие (4 000 ₽)</option>
+                            <option>Шатуш — средние (5 000 ₽)</option>
+                            <option>Шатуш — длинные (6 500 ₽)</option>
+                            <option>Babylights — короткие (4 500 ₽)</option>
+                            <option>Babylights — средние (6 000 ₽)</option>
+                            <option>Babylights — длинные (8 000 ₽)</option>
+                            <option>Тонирование — короткие (2 500 ₽)</option>
+                            <option>Тонирование — средние (3 000 ₽)</option>
+                            <option>Тонирование — длинные (4 000 ₽)</option>
+                        </optgroup>
+                        <optgroup label="💆‍♀️ Уход и восстановление">
+                            <option>Кератиновое выпрямление — короткие (4 500 ₽)</option>
+                            <option>Кератиновое выпрямление — средние (5 500 ₽)</option>
+                            <option>Кератиновое выпрямление — длинные (7 000 ₽)</option>
+                            <option>Ботокс для волос — короткие (3 800 ₽)</option>
+                            <option>Ботокс для волос — средние (4 500 ₽)</option>
+                            <option>Ботокс для волос — длинные (6 000 ₽)</option>
+                            <option>Полировка волос — короткие (2 500 ₽)</option>
+                            <option>Полировка волос — средние (3 000 ₽)</option>
+                            <option>Полировка волос — длинные (4 000 ₽)</option>
+                        </optgroup>
+                        <optgroup label="✨ Дополнительно">
+                            <option>Объемная укладка (600 ₽)</option>
+                            <option>Укладка с выпрямлением (700 ₽)</option>
+                            <option>Локоны / кудри (800 ₽)</option>
+                            <option>Пучок / ракушка (1 500 ₽)</option>
+                            <option>Коса / плетение (1 800 ₽)</option>
+                            <option>Свадебная прическа (2 500-3 500 ₽)</option>
+                            <option>Ламинирование волос (2 500-4 000 ₽)</option>
+                            <option>Экранирование волос (2 000-3 500 ₽)</option>
+                            <option>Лечение волос (от 1 000 ₽)</option>
+                        </optgroup>
                     </select>
-                    <textarea rows="3" placeholder="Пожелания"></textarea>
+                    <textarea rows="3" placeholder="Пожелания (дата, время, дополнительные вопросы)"></textarea>
                     <button type="submit" class="btn">Отправить заявку</button>
                     <p class="form-note">Нажимая кнопку, вы соглашаетесь на обработку данных</p>
                 </form>
@@ -841,46 +893,46 @@
     </section>
 
     <footer class="large-footer">
-    <div class="container footer-container">
-        <div class="footer-grid">
-            <div class="footer-col">
-                <div class="footer-title">Контакты</div>
-                <div class="footer-contact-item">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <a href="https://yandex.ru/maps/?text=Нефтеюганск, 75 микрорайон, 16а" target="_blank" style="color: white; text-decoration: none;">16а, 75 микрорайон, Нефтеюганск</a>
+        <div class="container footer-container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-title">Контакты</div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <a href="https://yandex.ru/maps/?text=Нефтеюганск, 75 микрорайон, 16а" target="_blank" style="color: white; text-decoration: none;">16а, 75 микрорайон, Нефтеюганск</a>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <a href="tel:+79825256561" style="color: white; text-decoration: none;">+7 (982) 525 65 61</a>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-clock"></i>
+                        <div>Ежедневно с 10:00 до 20:00</div>
+                    </div>
                 </div>
-                <div class="footer-contact-item">
-                    <i class="fas fa-phone-alt"></i>
-                    <a href="tel:+79825256561" style="color: white; text-decoration: none;">+7 (982) 525 65 61</a>
+                <div class="footer-col">
+                    <div class="footer-title">Социальные сети</div>
+                    <div class="footer-social">
+                        <a href="https://vk.com/prostostrigka_nygnsk" target="_blank"><i class="fab fa-vk"></i> ВКонтакте</a>
+                        <a href="https://www.youtube.com/watch?v=X6MnqUQeGcE" target="_blank"><i class="fab fa-youtube"></i> YouTube</a>
+                    </div>
                 </div>
-                <div class="footer-contact-item">
-                    <i class="fas fa-clock"></i>
-                    <div>Ежедневно с 10:00 до 20:00</div>
+                <div class="footer-col">
+                    <div class="footer-title">О нас</div>
+                    <ul class="footer-links">
+                        <li><a href="#about">О салоне</a></li>
+                        <li><a href="#services">Услуги и цены</a></li>
+                        <li><a href="#sterility">Стерильность</a></li>
+                        <li><a href="#reviews">Отзывы</a></li>
+                    </ul>
                 </div>
             </div>
-            <div class="footer-col">
-                <div class="footer-title">Социальные сети</div>
-                <div class="footer-social">
-                    <a href="https://vk.com/prostostrigka_nygnsk" target="_blank"><i class="fab fa-vk"></i> ВКонтакте</a>
-                    <a href="https://www.youtube.com/watch?v=X6MnqUQeGcE" target="_blank"><i class="fab fa-youtube"></i> YouTube</a>
-                </div>
-            </div>
-            <div class="footer-col">
-                <div class="footer-title">О нас</div>
-                <ul class="footer-links">
-                    <li><a href="#about">О салоне</a></li>
-                    <li><a href="#services">Услуги и цены</a></li>
-                    <li><a href="#sterility">Стерильность</a></li>
-                    <li><a href="#reviews">Отзывы</a></li>
-                </ul>
+            <div class="footer-bottom">
+                <p>© «Просто стрижка» 2026 | Нефтеюганск | Все права защищены</p>
+                <p class="footer-small">экспресс-парикмахерская нового формата</p>
             </div>
         </div>
-        <div class="footer-bottom">
-            <p>© «Просто стрижка» 2026 | Нефтеюганск | Все права защищены</p>
-            <p class="footer-small">экспресс-парикмахерская нового формата</p>
-        </div>
-    </div>
-</footer>
+    </footer>
 
     <!-- Модальное окно для увеличения фото отзывов -->
     <div id="reviewPhotoModal" class="modal">
