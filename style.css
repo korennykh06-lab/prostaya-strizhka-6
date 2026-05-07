@@ -6,6 +6,7 @@
 
 html, body {
     height: 100%;
+    scroll-behavior: smooth;
 }
 
 body {
@@ -29,6 +30,17 @@ main {
     padding: 0 40px;
 }
 
+/* КЛИКАБЕЛЬНЫЙ ЛОГОТИП */
+.logo-link {
+    text-decoration: none;
+    display: inline-block;
+}
+
+.logo-link:hover .logo-title {
+    opacity: 0.9;
+}
+
+/* ТИПОГРАФИКА */
 h1, h2, h3, h4, .logo-title, .footer-title, .category-title-light {
     font-family: 'Cormorant Garamond', serif;
     letter-spacing: 0.02em;
@@ -39,6 +51,14 @@ h2 {
     font-size: 2.8rem;
     font-weight: 400;
     color: #2A2A2A;
+}
+
+h3 {
+    font-size: 1.8rem;
+}
+
+p, li, .service-name, .service-price, .service-short-desc, .detail-label, .detail-value, .brand-link {
+    font-size: 1rem;
 }
 
 .section-header {
@@ -81,6 +101,7 @@ h2 {
     box-shadow: 0 8px 25px rgba(0,0,0,0.15);
 }
 
+/* ПЛАВАЮЩАЯ КНОПКА */
 .floating-btn {
     position: fixed;
     bottom: 30px;
@@ -136,98 +157,95 @@ h2 {
     box-shadow: 0 8px 30px rgba(0,0,0,0.35);
 }
 
-.fixed-marquee {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: #E53935;
-    color: white;
-    padding: 14px 0;
-    z-index: 999;
-    box-shadow: 0 -4px 15px rgba(0,0,0,0.2);
-    font-weight: 400;
-    font-size: 1rem;
-    transform: translateY(100%);
-    transition: transform 0.4s ease-in-out;
-    overflow: hidden;
-    white-space: nowrap;
-}
-
-.fixed-marquee.visible {
-    transform: translateY(0);
-}
-
-.marquee-content {
-    display: inline-block;
-    white-space: nowrap;
-    animation: marqueeScroll 20s linear infinite;
-    padding-left: 0;
-}
-
-.marquee-content:hover {
-    animation-play-state: paused;
-}
-
-.discount-icon {
-    font-size: 1.2rem;
-    margin: 0 5px;
-    display: inline-block;
-}
-
-.discount-text {
-    letter-spacing: 1px;
-    margin-right: 30px;
-    display: inline-block;
-    font-size: 1rem;
-    font-weight: 400;
-}
-
-@keyframes marqueeScroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-}
-
+/* ГЕРОЙ-БАННЕР */
 .hero {
     position: relative;
     background-image: url('https://images2.imgbox.com/b4/68/oQmEhqBi_o.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    min-height: 100vh;
-    height: auto;
+    min-height: 90vh;
     display: flex;
     align-items: center;
-    justify-content: center;
-    margin-bottom: 0;
-    margin-top: 0;
-    padding-top: 0;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.25);
+    z-index: 1;
 }
 
 .hero-content {
     position: relative;
-    z-index: 1;
+    z-index: 2;
     width: 100%;
 }
 
+/* ТЕЛЕФОН: баннер сдвинут СОВСЕМ НЕМНОГО ВЛЕВО, текст убран */
 @media (max-width: 768px) {
     .hero {
-        background-size: cover;
-        background-position: center center;
-        background-repeat: no-repeat;
-        min-height: auto;
-        width: 100%;
-        aspect-ratio: 16 / 10;
-        background-color: #F5EDE3;
+        min-height: 60vh;
+        background-position: 48% center;
+        align-items: flex-end;
+        padding-bottom: 0;
+    }
+    
+    .hero-overlay {
+        background: rgba(0, 0, 0, 0.15);
+    }
+    
+    /* Убираем текст полностью */
+    .hero-content::after {
+        content: none;
+        display: none;
     }
 }
 
 @media (max-width: 480px) {
     .hero {
-        aspect-ratio: 4 / 3;
+        min-height: 50vh;
+        background-position: 45% center;
     }
 }
 
+@media (max-width: 480px) {
+    .hero {
+        min-height: 50vh;
+        background-position: 60% center;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        min-height: 50vh;
+        background-position: 20% center;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        min-height: 50vh;
+        background-position: 80% center;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        min-height: 50vh;
+    }
+    
+    .hero-content::after {
+        content: "⚡ 299 ₽ • БЕЗ ЗАПИСИ";
+        font-size: 0.7rem;
+        padding: 8px 18px;
+    }
+}
+
+/* ШАПКА */
 header {
     position: fixed;
     top: -120px;
@@ -360,6 +378,7 @@ header.scrolled .nav-links a::after {
     background: white;
 }
 
+/* ОСНОВНЫЕ СТИЛИ */
 .features-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -835,37 +854,6 @@ header.scrolled .nav-links a::after {
     transform: scale(1.03);
 }
 
-@media (max-width: 992px) {
-    .interior-item {
-        min-width: 280px;
-        max-width: calc(50% - 20px);
-    }
-    .interior-item img {
-        height: 320px;
-    }
-}
-
-@media (max-width: 768px) {
-    .interior-gallery {
-        gap: 20px;
-    }
-    .interior-item {
-        min-width: 100%;
-        max-width: 100%;
-    }
-    .interior-item img {
-        height: 350px;
-        object-fit: cover;
-        object-position: center;
-    }
-}
-
-@media (max-width: 480px) {
-    .interior-item img {
-        height: 280px;
-    }
-}
-
 .features-tech-section {
     padding: 80px 0;
     background: #ffffff;
@@ -1172,14 +1160,6 @@ header.scrolled .nav-links a::after {
     border-radius: 8px;
 }
 
-.tip-image {
-    width: 100%;
-    max-width: 300px;
-    margin: 0 auto 15px;
-    display: block;
-    border-radius: 16px;
-}
-
 .review-img-clickable {
     cursor: pointer;
     transition: opacity 0.2s;
@@ -1233,13 +1213,6 @@ header.scrolled .nav-links a::after {
     background: white;
 }
 
-.brands-subtitle {
-    color: rgba(255,255,255,0.85);
-    font-size: 1rem;
-    letter-spacing: 2px;
-    margin-top: 12px;
-}
-
 .brands-list {
     max-width: 900px;
     margin: 40px auto 0;
@@ -1248,18 +1221,23 @@ header.scrolled .nav-links a::after {
     gap: 30px 25px;
 }
 
-.brand-name {
+.brand-link {
     font-size: 1.1rem;
     font-weight: 400;
     color: white;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
     padding: 8px 0;
     border-bottom: 1px solid rgba(255,255,255,0.2);
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    letter-spacing: 0.5px;
 }
 
-.brand-name:hover {
+.brand-link:hover {
     transform: translateY(-3px);
-    color: #ddd;
+    color: #5BA4CF;
+    border-bottom-color: #5BA4CF;
 }
 
 .trends-section {
@@ -1492,7 +1470,6 @@ form input:focus, form select:focus, form textarea:focus {
     width: 24px;
 }
 
-/* Кликабельные ссылки в подвале */
 .footer-contact-item a {
     color: white;
     text-decoration: none;
@@ -1559,19 +1536,103 @@ form input:focus, form select:focus, form textarea:focus {
     opacity: 0.8;
 }
 
+/* ===== АДАПТАЦИЯ ПОД ТЕЛЕФОН ===== */
 @media (max-width: 992px) {
-    .container { padding: 0 25px; }
-    .brands-list { grid-template-columns: repeat(3, 1fr); }
-    .footer-grid { grid-template-columns: repeat(2, 1fr); }
-    .tips-grid-gost { grid-template-columns: repeat(2, 1fr); }
-    .sterility-row { flex-direction: column; }
-    h2 { font-size: 2.4rem; }
+    .container {
+        padding: 0 25px;
+    }
+    .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .tips-grid-gost {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .sterility-row {
+        flex-direction: column;
+    }
+    h2 {
+        font-size: 2.2rem;
+    }
+    .trends-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .brands-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 @media (max-width: 768px) {
-    .container { padding: 0 20px; }
+    .container {
+        padding: 0 20px;
+    }
     
-    .burger-menu { display: flex; }
+    body {
+        font-size: 15px;
+    }
+    
+    h2 {
+        font-size: 1.8rem;
+    }
+    
+    h3 {
+        font-size: 1.4rem;
+    }
+    
+    p, li, .service-name, .service-price, .service-short-desc, .detail-label, .detail-value, .brand-link {
+        font-size: 0.95rem;
+    }
+    
+    .category-title-light {
+        font-size: 1.5rem;
+    }
+    
+    .feature-card h3 {
+        font-size: 1.1rem;
+    }
+    
+    .feature-card p {
+        font-size: 0.85rem;
+    }
+    
+    .about-text h3 {
+        font-size: 1.6rem;
+    }
+    
+    .about-text p {
+        font-size: 0.9rem;
+    }
+    
+    .service-name {
+        font-size: 1.2rem;
+    }
+    
+    .service-price {
+        font-size: 1rem;
+    }
+    
+    .tech-content h3 {
+        font-size: 1.4rem;
+    }
+    
+    .tech-content p {
+        font-size: 0.9rem;
+    }
+    
+    .aesthetics-section-title {
+        font-size: 1.8rem;
+    }
+    
+    .trend-content h3 {
+        font-size: 1.1rem;
+    }
+    
+    .footer-title {
+        font-size: 1.2rem;
+    }
+    
+    .burger-menu {
+        display: flex;
+    }
     
     .nav-links {
         position: fixed;
@@ -1595,7 +1656,7 @@ form input:focus, form select:focus, form textarea:focus {
     }
     
     .nav-links a {
-        font-size: 1.1rem;
+        font-size: 1rem;
         color: white;
         padding: 12px 20px;
         width: 100%;
@@ -1616,25 +1677,59 @@ form input:focus, form select:focus, form textarea:focus {
         border-radius: 10px;
     }
     
-    body.menu-open { overflow: hidden; }
+    body.menu-open {
+        overflow: hidden;
+    }
     
-    .logo-img { height: 40px; }
-    .logo-title { font-size: 1.3rem; }
-    .logo-subtitle { font-size: 0.65rem; }
+    .logo-img {
+        height: 40px;
+    }
+    .logo-title {
+        font-size: 1.2rem;
+    }
+    .logo-subtitle {
+        font-size: 0.6rem;
+    }
     
-    .features-grid { grid-template-columns: 1fr; }
-    .about-content { flex-direction: column; }
-    .services-grid { grid-template-columns: 1fr; }
-    .category-header { flex-direction: column; align-items: flex-start; gap: 8px; }
-    .mosaic-grid-mobile { grid-template-columns: 1fr; }
-    .trends-grid { grid-template-columns: 1fr; }
-    .tips-grid-gost { grid-template-columns: 1fr; }
-    .review-card-clean { flex: 0 0 100%; }
-    .brands-list { grid-template-columns: repeat(2, 1fr); }
-    .footer-grid { grid-template-columns: 1fr; text-align: center; }
-    .footer-contact-item { justify-content: center; }
-    .footer-social { align-items: center; }
-    .footer-links { text-align: center; }
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+    .about-content {
+        flex-direction: column;
+    }
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+    .category-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    .mosaic-grid-mobile {
+        grid-template-columns: 1fr;
+    }
+    .trends-grid {
+        grid-template-columns: 1fr;
+    }
+    .tips-grid-gost {
+        grid-template-columns: 1fr;
+    }
+    .review-card-clean {
+        flex: 0 0 100%;
+    }
+    .footer-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    .footer-contact-item {
+        justify-content: center;
+    }
+    .footer-social {
+        align-items: center;
+    }
+    .footer-links {
+        text-align: center;
+    }
     
     .floating-btn {
         width: 55px;
@@ -1642,30 +1737,59 @@ form input:focus, form select:focus, form textarea:focus {
         bottom: 70px;
         right: 16px;
     }
-    .floating-btn i { font-size: 1.5rem; }
-    
-    h2 { font-size: 2rem; }
-    .category-title-light { font-size: 1.5rem; }
-    .tech-item { flex-direction: column !important; text-align: center; }
-    .tech-content h3:after { left: 50%; transform: translateX(-50%); }
-    .tech-image-circle { width: 300px; height: 300px; }
-    
-    .sterility-bg {
-        background-attachment: scroll;
+    .floating-btn i {
+        font-size: 1.5rem;
     }
     
+    .tech-item {
+        flex-direction: column !important;
+        text-align: center;
+    }
+    .tech-content h3:after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .tech-image-circle {
+        width: 280px;
+        height: 280px;
+    }
+    
+    .sterility-bg,
     .brands-bg {
         background-attachment: scroll;
     }
 }
 
 @media (max-width: 480px) {
-    .container { padding: 0 14px; }
-    .logo-img { height: 35px; }
-    .logo-title { font-size: 1.1rem; }
-    .brands-list { grid-template-columns: 1fr; }
-    .trend-img { height: 280px; }
-    .tech-image-circle { width: 220px; height: 220px; }
+    .container {
+        padding: 0 14px;
+    }
+    
+    body {
+        font-size: 14px;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+    }
+    
+    h3 {
+        font-size: 1.2rem;
+    }
+    
+    .logo-img {
+        height: 35px;
+    }
+    .logo-title {
+        font-size: 1rem;
+    }
+    .trend-img {
+        height: 250px;
+    }
+    .tech-image-circle {
+        width: 200px;
+        height: 200px;
+    }
     
     .nav-links {
         width: 260px;
@@ -1673,7 +1797,36 @@ form input:focus, form select:focus, form textarea:focus {
     }
     
     .nav-links a {
-        font-size: 1rem;
+        font-size: 0.9rem;
         padding: 10px 15px;
+    }
+    
+    form {
+        padding: 20px;
+    }
+    
+    form select {
+        font-size: 0.85rem;
+    }
+    
+    .brand-link {
+        font-size: 0.85rem;
+    }
+    
+    .brands-list {
+        grid-template-columns: 1fr;
+    }
+    
+    .interior-item img {
+        height: 250px;
+    }
+    
+    .service-photo-btn {
+        min-width: 120px;
+        font-size: 0.7rem;
+    }
+    
+    .modal-header h2 {
+        font-size: 1.2rem;
     }
 }
