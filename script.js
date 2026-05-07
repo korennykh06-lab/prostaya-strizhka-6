@@ -99,6 +99,17 @@ function initSmoothScroll() {
     }
 }
 
+// ========== КЛИКАБЕЛЬНЫЙ ЛОГОТИП (ВОЗВРАТ НА ГЛАВНУЮ) ==========
+function initLogoLink() {
+    const logoLink = document.getElementById('logoLink');
+    if (logoLink) {
+        logoLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+}
+
 // ========== КНОПКИ ПОДРОБНЕЕ У УСЛУГ ==========
 function initServiceButtons() {
     const detailButtons = document.querySelectorAll('.service-detail-btn');
@@ -135,16 +146,32 @@ function initServiceButtons() {
 
 // ========== СОВЕТЫ ==========
 const tipsData = {
-    1: { title: 'Как правильно выбрать расчёску?', content: 'Расчёска подбирается исходя из типа кожи головы, длины и толщины волос. Массажная щётка сочетает расчёсывание и массаж.' },
-    2: { title: 'Как сохранить волосы здоровыми?', content: 'Принимайте витамины, увлажняйте волосы, используйте индивидуальный уход, минимизируйте стресс, пейте больше воды.' },
-    3: { title: 'Что портит наши волосы?', content: 'Механическое, тепловое, химическое воздействие, UV-лучи, хлорированная и солёная вода.' },
-    4: { title: 'Как часто нужно стричь волосы?', content: 'Короткие стрижки — каждые 1,5–2 месяца, средние — раз в 3 месяца, длинные — раз в 3 месяца подстригайте кончики.' }
+    1: { title: 'Как правильно выбрать расчёску?', content: '<p>Расчёска подбирается исходя из типа кожи головы, длины и толщины волос.</p><ul><li><strong>Массажная щётка</strong> — сочетает расчёсывание и массаж, подходит для всех типов волос.</li><li><strong>Гребень с редкими зубьями</strong> — для тонких и ломких волос.</li><li><strong>Расчёска с натуральной щетиной</strong> — для густых и вьющихся волос.</li><li><strong>Силиконовая расчёска</strong> — для мокрых волос, не травмирует.</li></ul><p>Деревянные расчёски лучше пластмассовых — они не электризуют волосы.</p>' },
+    2: { title: 'Как сохранить волосы здоровыми?', content: '<p>Чтобы волосы были здоровыми и красивыми, следуйте этим правилам:</p><ul><li>Принимайте витамины (группа B, цинк, железо, биотин)</li><li>Увлажняйте волосы масками 1-2 раза в неделю</li><li>Используйте индивидуальный уход под тип волос</li><li>Минимизируйте стресс и высыпайтесь</li><li>Пейте больше воды (1.5-2 литра в день)</li><li>Защищайте волосы от солнца и термовоздействия</li><li>Регулярно подстригайте секущиеся кончики</li></ul>' },
+    3: { title: 'Что портит наши волосы?', content: '<p>Основные факторы, разрушающие структуру волос:</p><ul><li><strong>Механическое воздействие</strong> — грубое расчёсывание, тугие резинки, жёсткие заколки</li><li><strong>Тепловое воздействие</strong> — утюжки, фены, плойки без термозащиты</li><li><strong>Химическое воздействие</strong> — частые окрашивания, химическая завивка</li><li><strong>Внешние факторы</strong> — UV-лучи, хлорированная вода, солёная вода в море</li><li><strong>Неправильное питание</strong> — дефицит витаминов и белка</li></ul>' },
+    4: { title: 'Как часто нужно стричь волосы?', content: '<p>Рекомендации по частоте стрижки:</p><ul><li><strong>Короткие стрижки</strong> (пикси, боб) — каждые 1.5-2 месяца для поддержания формы</li><li><strong>Средние волосы</strong> — раз в 3 месяца</li><li><strong>Длинные волосы</strong> — раз в 3-4 месяца подстригайте кончики, чтобы избежать сечения</li><li><strong>Окрашенные волосы</strong> — чаще, раз в 2-2.5 месяца</li><li><strong>Вьющиеся волосы</strong> — раз в 3-4 месяца</li></ul><p>Регулярная стрижка стимулирует рост волос и придаёт ухоженный вид.</p>' }
 };
 
 function openGostTip(tipId) {
     const tip = tipsData[tipId];
-    if (!tip) return;
-    alert(tip.title + '\n\n' + tip.content);
+    const modal = document.getElementById('gostModal');
+    const title = document.getElementById('gostModalTitle');
+    const body = document.getElementById('gostModalBody');
+    
+    if (tip && modal) {
+        title.textContent = tip.title;
+        body.innerHTML = tip.content;
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function closeGostModal() {
+    const modal = document.getElementById('gostModal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
 }
 
 function initTipsButtons() {
@@ -156,6 +183,11 @@ function initTipsButtons() {
             openGostTip(tipId);
         });
     }
+    
+    const closeGost = document.querySelector('.close-gost');
+    if (closeGost) {
+        closeGost.onclick = closeGostModal;
+    }
 }
 
 // ========== ФОРМА С ВАЛИДАЦИЕЙ ==========
@@ -166,14 +198,12 @@ function initBookingForm() {
     const nameInput = document.getElementById('userName');
     const phoneInput = document.getElementById('userPhone');
     
-    // Валидация имени: только буквы, пробелы и дефисы
     if (nameInput) {
         nameInput.addEventListener('input', function() {
             this.value = this.value.replace(/[^a-zA-Zа-яА-ЯёЁ\s\-]/g, '');
         });
     }
     
-    // Валидация телефона: автоматическое форматирование +7 и 10 цифр
     if (phoneInput) {
         phoneInput.addEventListener('input', function(e) {
             let value = this.value.replace(/\D/g, '');
@@ -221,7 +251,6 @@ function initBookingForm() {
         let isValid = true;
         let errorMessage = '';
         
-        // Проверка имени
         const name = nameInput ? nameInput.value.trim() : '';
         if (!name) {
             errorMessage += '• Введите имя\n';
@@ -231,7 +260,6 @@ function initBookingForm() {
             isValid = false;
         }
         
-        // Проверка телефона
         const phone = phoneInput ? phoneInput.value.trim() : '';
         const phoneDigits = phone.replace(/\D/g, '');
         if (!phone || phoneDigits.length !== 11 || !phoneDigits.startsWith('7')) {
@@ -240,7 +268,9 @@ function initBookingForm() {
         }
         
         if (isValid) {
-            alert('Спасибо, ' + name + '! Мы скоро свяжемся с вами.');
+            const serviceSelect = document.getElementById('userService');
+            const selectedService = serviceSelect ? serviceSelect.options[serviceSelect.selectedIndex].text : '';
+            alert('Спасибо, ' + name + '!\n\nВы записаны на: ' + selectedService + '\n\nМы свяжемся с вами в ближайшее время для подтверждения записи.');
             form.reset();
             if (phoneInput) phoneInput.value = '+7 ';
         } else {
@@ -270,24 +300,6 @@ function initHeaderVisibility() {
             header.classList.remove('visible', 'scrolled');
         }
     });
-}
-
-// ========== БЕГУЩАЯ СТРОКА ==========
-function initMarqueeVisibility() {
-    const marquee = document.getElementById('fixedMarquee');
-    if (!marquee) return;
-    
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 200) {
-            marquee.classList.add('visible');
-        } else {
-            marquee.classList.remove('visible');
-        }
-    });
-    
-    setTimeout(function() {
-        marquee.classList.add('visible');
-    }, 1000);
 }
 
 // ========== СЛАЙДЕР ОТЗЫВОВ ==========
@@ -367,28 +379,23 @@ function initReviewsSlider() {
 
 // ========== МОДАЛЬНЫЕ ОКНА ==========
 function initModalsClose() {
-    const closeButtons = document.querySelectorAll('.close-gost, .close-photo');
+    const closeButtons = document.querySelectorAll('.close-photo');
     for (let i = 0; i < closeButtons.length; i++) {
         closeButtons[i].onclick = function() {
-            if (this.classList.contains('close-gost')) {
-                const modal = document.getElementById('gostModal');
-                if (modal) modal.style.display = 'none';
-            } else {
-                closeServicePhotoModal();
-            }
+            closeServicePhotoModal();
             document.body.style.overflow = 'auto';
         };
     }
     
     window.onclick = function(event) {
-        const gostModal = document.getElementById('gostModal');
         const serviceModal = document.getElementById('servicePhotoModal');
-        if (event.target === gostModal) {
-            gostModal.style.display = 'none';
+        const gostModal = document.getElementById('gostModal');
+        if (event.target === serviceModal) {
+            closeServicePhotoModal();
             document.body.style.overflow = 'auto';
         }
-        if (event.target === serviceModal) {
-            serviceModal.style.display = 'none';
+        if (event.target === gostModal) {
+            closeGostModal();
             document.body.style.overflow = 'auto';
         }
     };
@@ -435,11 +442,11 @@ function initReviewImageZoom() {
 document.addEventListener('DOMContentLoaded', function() {
     initBurgerMenu();
     initSmoothScroll();
+    initLogoLink();
     initServiceButtons();
     initTipsButtons();
     initBookingForm();
     initHeaderVisibility();
-    initMarqueeVisibility();
     initReviewsSlider();
     initModalsClose();
     initReviewImageZoom();
