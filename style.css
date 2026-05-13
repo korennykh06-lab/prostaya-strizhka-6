@@ -30,35 +30,24 @@ main {
     padding: 0 40px;
 }
 
-/* КЛИКАБЕЛЬНЫЙ ЛОГОТИП */
-.logo-link {
-    text-decoration: none;
-    display: inline-block;
-}
-
-.logo-link:hover .logo-title {
-    opacity: 0.9;
-}
-
-/* ТИПОГРАФИКА */
-h1, h2, h3, h4, .logo-title, .footer-title, .category-title-light {
-    font-family: 'Cormorant Garamond', serif;
+/* ЯПОНСКИЙ ШРИФТ ДЛЯ ВСЕХ ЗАГОЛОВКОВ */
+h1, h2, h3, h4, .logo-title, .footer-title, .category-title-light,
+.aesthetics-section-title, .trend-content h3, .service-name,
+.about-text h3, .feature-card h3, .tech-content h3, .tip-card-gost h3 {
+    font-family: 'Noto Serif JP', 'Times New Roman', serif;
     letter-spacing: 0.02em;
-    font-weight: 400;
+    font-weight: 500;
 }
 
 h2 {
     font-size: 2.8rem;
-    font-weight: 400;
+    font-weight: 500;
     color: #2A2A2A;
 }
 
 h3 {
     font-size: 1.8rem;
-}
-
-p, li, .service-name, .service-price, .service-short-desc, .detail-label, .detail-value, .brand-link {
-    font-size: 1rem;
+    font-weight: 500;
 }
 
 .section-header {
@@ -157,7 +146,7 @@ p, li, .service-name, .service-price, .service-short-desc, .detail-label, .detai
     box-shadow: 0 8px 30px rgba(0,0,0,0.35);
 }
 
-/* ГЕРОЙ-БАННЕР */
+/* ГЕРОЙ-БАННЕР - СЛЕГКА ПОСВЕТЛЕЛ */
 .hero {
     position: relative;
     background-image: url('https://images2.imgbox.com/b4/68/oQmEhqBi_o.jpg');
@@ -175,7 +164,7 @@ p, li, .service-name, .service-price, .service-short-desc, .detail-label, .detai
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.25);
+    background: rgba(0, 0, 0, 0.22);
     z-index: 1;
 }
 
@@ -185,67 +174,7 @@ p, li, .service-name, .service-price, .service-short-desc, .detail-label, .detai
     width: 100%;
 }
 
-/* ТЕЛЕФОН: баннер сдвинут СОВСЕМ НЕМНОГО ВЛЕВО, текст убран */
-@media (max-width: 768px) {
-    .hero {
-        min-height: 60vh;
-        background-position: 48% center;
-        align-items: flex-end;
-        padding-bottom: 0;
-    }
-    
-    .hero-overlay {
-        background: rgba(0, 0, 0, 0.15);
-    }
-    
-    /* Убираем текст полностью */
-    .hero-content::after {
-        content: none;
-        display: none;
-    }
-}
-
-@media (max-width: 480px) {
-    .hero {
-        min-height: 50vh;
-        background-position: 45% center;
-    }
-}
-
-@media (max-width: 480px) {
-    .hero {
-        min-height: 50vh;
-        background-position: 60% center;
-    }
-}
-
-@media (max-width: 480px) {
-    .hero {
-        min-height: 50vh;
-        background-position: 20% center;
-    }
-}
-
-@media (max-width: 480px) {
-    .hero {
-        min-height: 50vh;
-        background-position: 80% center;
-    }
-}
-
-@media (max-width: 480px) {
-    .hero {
-        min-height: 50vh;
-    }
-    
-    .hero-content::after {
-        content: "⚡ 299 ₽ • БЕЗ ЗАПИСИ";
-        font-size: 0.7rem;
-        padding: 8px 18px;
-    }
-}
-
-/* ШАПКА */
+/* ШАПКА - БЕЗ ПОДЧЁРКИВАНИЯ */
 header {
     position: fixed;
     top: -120px;
@@ -282,13 +211,23 @@ header.scrolled .burger-menu span {
     width: auto;
 }
 
+.logo-link {
+    text-decoration: none;
+    display: inline-block;
+}
+
+.logo-link:hover {
+    text-decoration: none;
+}
+
 .logo-title {
     font-size: 1.6rem;
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 400;
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 500;
     margin: 0;
     color: #2A2A2A;
     letter-spacing: 1px;
+    text-decoration: none;
 }
 
 .logo-subtitle {
@@ -296,6 +235,12 @@ header.scrolled .burger-menu span {
     font-size: 0.75rem;
     letter-spacing: 0.5px;
     font-weight: 400;
+    text-decoration: none;
+}
+
+.logo-link:hover .logo-title,
+.logo-link:hover .logo-subtitle {
+    text-decoration: none;
 }
 
 .header-content {
@@ -342,7 +287,7 @@ header.scrolled .burger-menu span {
 
 .nav-links {
     display: flex;
-    gap: 25px;
+    gap: 20px;
     flex-wrap: wrap;
 }
 
@@ -350,32 +295,17 @@ header.scrolled .burger-menu span {
     text-decoration: none;
     color: #2A2A2A;
     font-weight: 400;
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     transition: all 0.3s;
     letter-spacing: 0.3px;
-    position: relative;
 }
 
-.nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 0;
-    height: 1px;
-    background: #5BA4CF;
-    transition: width 0.3s ease;
+.nav-links a:hover {
+    color: #5BA4CF;
 }
 
-.nav-links a:hover::after {
-    width: 100%;
-}
-
-header.scrolled .nav-links a {
-    color: white;
-}
-header.scrolled .nav-links a::after {
-    background: white;
+header.scrolled .nav-links a:hover {
+    color: rgba(255,255,255,0.8);
 }
 
 /* ОСНОВНЫЕ СТИЛИ */
@@ -408,7 +338,7 @@ header.scrolled .nav-links a::after {
 
 .feature-card h3 {
     font-size: 1.2rem;
-    font-weight: 400;
+    font-weight: 500;
     margin-bottom: 12px;
     color: #2A2A2A;
 }
@@ -441,8 +371,7 @@ header.scrolled .nav-links a::after {
 
 .about-text h3 {
     font-size: 2rem;
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 400;
+    font-weight: 500;
     margin-bottom: 20px;
     color: #2A2A2A;
 }
@@ -493,8 +422,7 @@ header.scrolled .nav-links a::after {
 
 .category-title-light {
     font-size: 1.8rem;
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 400;
+    font-weight: 500;
     color: #2A2A2A;
 }
 
@@ -545,8 +473,8 @@ header.scrolled .nav-links a::after {
 
 .service-name {
     font-size: 1.3rem;
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 400;
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 500;
     color: #2A2A2A;
 }
 
@@ -728,8 +656,8 @@ header.scrolled .nav-links a::after {
 
 .sterility-text-card h2 {
     font-size: 2rem;
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 400;
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 500;
     color: white;
     margin-bottom: 1.5rem;
 }
@@ -810,48 +738,85 @@ header.scrolled .nav-links a::after {
     border-radius: 30px;
 }
 
-.interior-section {
+/* ИНТЕРЬЕР - СЛАЙДЕР С БОЛЬШИМИ ФОТО */
+.interior-slider-section {
     background: white;
     padding: 60px 0;
 }
 
-.interior-gallery {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: stretch;
-    gap: 30px;
-    flex-wrap: wrap;
-    margin-top: 40px;
-}
-
-.interior-item {
-    flex: 1;
-    min-width: 250px;
-    max-width: calc(25% - 30px);
-    border-radius: 24px;
+.slider-container {
+    position: relative;
+    max-width: 1100px;
+    margin: 0 auto;
     overflow: hidden;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-    transition: all 0.4s ease;
-    cursor: pointer;
-    background: #f5f5f5;
+    border-radius: 24px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
 }
 
-.interior-item img {
+.interior-slider {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+    flex: 0 0 100%;
+}
+
+.slide img {
     width: 100%;
-    height: 350px;
+    height: 550px;
     object-fit: cover;
     display: block;
-    transition: transform 0.5s ease;
 }
 
-.interior-item:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 30px 50px rgba(0, 0, 0, 0.2);
+.slider-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.6);
+    color: white;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 24px;
+    transition: all 0.3s;
+    z-index: 10;
 }
 
-.interior-item:hover img {
-    transform: scale(1.03);
+.slider-arrow:hover {
+    background: #5BA4CF;
+}
+
+.prev {
+    left: 20px;
+}
+
+.next {
+    right: 20px;
+}
+
+.slider-dots {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.dot.active {
+    background: #5BA4CF;
+    width: 30px;
+    border-radius: 6px;
 }
 
 .features-tech-section {
@@ -886,8 +851,7 @@ header.scrolled .nav-links a::after {
 
 .tech-content h3 {
     font-size: 1.8rem;
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 400;
+    font-weight: 500;
     color: #2A2A2A;
     margin-bottom: 20px;
     position: relative;
@@ -989,11 +953,10 @@ header.scrolled .nav-links a::after {
 
 .aesthetics-section-title {
     font-size: 2.2rem;
-    font-family: 'Cormorant Garamond', serif;
     color: white;
     text-shadow: 0 2px 10px rgba(0,0,0,0.3);
     letter-spacing: 2px;
-    font-weight: 400;
+    font-weight: 500;
 }
 
 .aesthetics-title-wrapper .section-line {
@@ -1063,7 +1026,7 @@ header.scrolled .nav-links a::after {
 
 .tip-card-gost h3 {
     font-size: 1.1rem;
-    font-weight: 400;
+    font-weight: 500;
     margin-bottom: 10px;
 }
 
@@ -1282,7 +1245,7 @@ header.scrolled .nav-links a::after {
 
 .trend-content h3 {
     font-size: 1.3rem;
-    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
 }
 
 .reviews-section-clean {
@@ -1393,7 +1356,7 @@ form {
 
 form h3 {
     font-size: 1.5rem;
-    font-weight: 400;
+    font-weight: 500;
     margin-bottom: 20px;
 }
 
@@ -1452,10 +1415,10 @@ form input:focus, form select:focus, form textarea:focus {
 }
 
 .footer-title {
-    font-size: 1.4rem;
-    font-weight: 400;
+    font-size: 1.2rem;
+    font-weight: 500;
     margin-bottom: 20px;
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Noto Serif JP', serif;
 }
 
 .footer-contact-item {
@@ -1463,7 +1426,7 @@ form input:focus, form select:focus, form textarea:focus {
     align-items: center;
     gap: 12px;
     margin-bottom: 14px;
-    font-size: 1rem;
+    font-size: 0.9rem;
 }
 
 .footer-contact-item i {
@@ -1494,6 +1457,7 @@ form input:focus, form select:focus, form textarea:focus {
     align-items: center;
     gap: 10px;
     transition: all 0.3s;
+    font-size: 0.9rem;
 }
 
 .footer-social a:hover {
@@ -1513,6 +1477,7 @@ form input:focus, form select:focus, form textarea:focus {
     color: rgba(255,255,255,0.95);
     text-decoration: none;
     transition: all 0.3s;
+    font-size: 0.9rem;
 }
 
 .footer-links a:hover {
@@ -1527,16 +1492,16 @@ form input:focus, form select:focus, form textarea:focus {
 }
 
 .footer-bottom p {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     margin-bottom: 8px;
 }
 
 .footer-small {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     opacity: 0.8;
 }
 
-/* ===== АДАПТАЦИЯ ПОД ТЕЛЕФОН ===== */
+/* АДАПТАЦИЯ */
 @media (max-width: 992px) {
     .container {
         padding: 0 25px;
@@ -1559,6 +1524,9 @@ form input:focus, form select:focus, form textarea:focus {
     .brands-list {
         grid-template-columns: repeat(2, 1fr);
     }
+    .slide img {
+        height: 450px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -1576,10 +1544,6 @@ form input:focus, form select:focus, form textarea:focus {
     
     h3 {
         font-size: 1.4rem;
-    }
-    
-    p, li, .service-name, .service-price, .service-short-desc, .detail-label, .detail-value, .brand-link {
-        font-size: 0.95rem;
     }
     
     .category-title-light {
@@ -1626,10 +1590,6 @@ form input:focus, form select:focus, form textarea:focus {
         font-size: 1.1rem;
     }
     
-    .footer-title {
-        font-size: 1.2rem;
-    }
-    
     .burger-menu {
         display: flex;
     }
@@ -1668,13 +1628,10 @@ form input:focus, form select:focus, form textarea:focus {
         border-bottom: none;
     }
     
-    .nav-links a::after {
-        display: none;
-    }
-    
     .nav-links a:hover {
         background: rgba(255,255,255,0.2);
         border-radius: 10px;
+        color: white;
     }
     
     body.menu-open {
@@ -1758,6 +1715,16 @@ form input:focus, form select:focus, form textarea:focus {
     .brands-bg {
         background-attachment: scroll;
     }
+    
+    .slide img {
+        height: 350px;
+    }
+    
+    .slider-arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -1817,10 +1784,6 @@ form input:focus, form select:focus, form textarea:focus {
         grid-template-columns: 1fr;
     }
     
-    .interior-item img {
-        height: 250px;
-    }
-    
     .service-photo-btn {
         min-width: 120px;
         font-size: 0.7rem;
@@ -1828,5 +1791,9 @@ form input:focus, form select:focus, form textarea:focus {
     
     .modal-header h2 {
         font-size: 1.2rem;
+    }
+    
+    .slide img {
+        height: 280px;
     }
 }
