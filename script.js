@@ -1,4 +1,4 @@
-// ========== ФОТО ДЛЯ УСЛУГ ==========
+// ФОТО ДЛЯ УСЛУГ
 const servicePhotos = {
     simple_woman: 'https://i.pinimg.com/1200x/97/ea/3a/97ea3ab88d3586ba070665fddd8e0640.jpg',
     architectural_woman: 'https://i.pinimg.com/1200x/bb/82/47/bb82478544b01929cb37416cf26fe65e.jpg',
@@ -51,7 +51,7 @@ function closeServicePhotoModal() {
     }
 }
 
-// ========== БУРГЕР-МЕНЮ ==========
+// БУРГЕР-МЕНЮ
 function initBurgerMenu() {
     const burger = document.getElementById('burgerMenu');
     const nav = document.getElementById('navLinks');
@@ -83,7 +83,7 @@ function initBurgerMenu() {
     }
 }
 
-// ========== ПЛАВНЫЙ СКРОЛЛ ==========
+// ПЛАВНЫЙ СКРОЛЛ
 function initSmoothScroll() {
     const links = document.querySelectorAll('a[href^="#"]');
     for (let i = 0; i < links.length; i++) {
@@ -99,7 +99,7 @@ function initSmoothScroll() {
     }
 }
 
-// ========== КЛИКАБЕЛЬНЫЙ ЛОГОТИП (ВОЗВРАТ НА ГЛАВНУЮ) ==========
+// ЛОГОТИП
 function initLogoLink() {
     const logoLink = document.getElementById('logoLink');
     if (logoLink) {
@@ -110,7 +110,7 @@ function initLogoLink() {
     }
 }
 
-// ========== КНОПКИ ПОДРОБНЕЕ У УСЛУГ ==========
+// КНОПКИ УСЛУГ
 function initServiceButtons() {
     const detailButtons = document.querySelectorAll('.service-detail-btn');
     for (let i = 0; i < detailButtons.length; i++) {
@@ -144,7 +144,7 @@ function initServiceButtons() {
     }
 }
 
-// ========== СОВЕТЫ ==========
+// СОВЕТЫ
 const tipsData = {
     1: { title: 'Как правильно выбрать расчёску?', content: '<p>Расчёска подбирается исходя из типа кожи головы, длины и толщины волос.</p><ul><li><strong>Массажная щётка</strong> — сочетает расчёсывание и массаж, подходит для всех типов волос.</li><li><strong>Гребень с редкими зубьями</strong> — для тонких и ломких волос.</li><li><strong>Расчёска с натуральной щетиной</strong> — для густых и вьющихся волос.</li><li><strong>Силиконовая расчёска</strong> — для мокрых волос, не травмирует.</li></ul><p>Деревянные расчёски лучше пластмассовых — они не электризуют волосы.</p>' },
     2: { title: 'Как сохранить волосы здоровыми?', content: '<p>Чтобы волосы были здоровыми и красивыми, следуйте этим правилам:</p><ul><li>Принимайте витамины (группа B, цинк, железо, биотин)</li><li>Увлажняйте волосы масками 1-2 раза в неделю</li><li>Используйте индивидуальный уход под тип волос</li><li>Минимизируйте стресс и высыпайтесь</li><li>Пейте больше воды (1.5-2 литра в день)</li><li>Защищайте волосы от солнца и термовоздействия</li><li>Регулярно подстригайте секущиеся кончики</li></ul>' },
@@ -190,7 +190,7 @@ function initTipsButtons() {
     }
 }
 
-// ========== ФОРМА С ВАЛИДАЦИЕЙ ==========
+// ФОРМА
 function initBookingForm() {
     const form = document.getElementById('booking-form');
     if (!form) return;
@@ -279,7 +279,7 @@ function initBookingForm() {
     });
 }
 
-// ========== ШАПКА ПРИ СКРОЛЛЕ ==========
+// ШАПКА ПРИ СКРОЛЛЕ
 function initHeaderVisibility() {
     const header = document.getElementById('mainHeader');
     if (!header) return;
@@ -302,7 +302,7 @@ function initHeaderVisibility() {
     });
 }
 
-// ========== СЛАЙДЕР ОТЗЫВОВ ==========
+// СЛАЙДЕР ОТЗЫВОВ
 function initReviewsSlider() {
     const track = document.getElementById('reviewsTrack');
     const prev = document.getElementById('prevReviewBtn');
@@ -377,7 +377,84 @@ function initReviewsSlider() {
     update();
 }
 
-// ========== МОДАЛЬНЫЕ ОКНА ==========
+// СЛАЙДЕР ИНТЕРЬЕРА
+function initInteriorSlider() {
+    const slider = document.getElementById('interiorSlider');
+    const prevBtn = document.getElementById('prevSlide');
+    const nextBtn = document.getElementById('nextSlide');
+    const dotsContainer = document.getElementById('sliderDots');
+    
+    if (!slider || !prevBtn || !nextBtn) return;
+    
+    const slides = slider.querySelectorAll('.slide');
+    if (slides.length === 0) return;
+    
+    let currentIndex = 0;
+    const totalSlides = slides.length;
+    
+    function updateSlider() {
+        slider.style.transform = 'translateX(' + (-currentIndex * 100) + '%)';
+        updateDots();
+    }
+    
+    function updateDots() {
+        if (!dotsContainer) return;
+        const dots = dotsContainer.querySelectorAll('.dot');
+        for (let i = 0; i < dots.length; i++) {
+            if (i === currentIndex) {
+                dots[i].classList.add('active');
+            } else {
+                dots[i].classList.remove('active');
+            }
+        }
+    }
+    
+    function createDots() {
+        if (!dotsContainer) return;
+        dotsContainer.innerHTML = '';
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if (i === 0) dot.classList.add('active');
+            dot.addEventListener('click', function() {
+                currentIndex = i;
+                updateSlider();
+            });
+            dotsContainer.appendChild(dot);
+        }
+    }
+    
+    prevBtn.onclick = function() {
+        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+        updateSlider();
+    };
+    
+    nextBtn.onclick = function() {
+        currentIndex = (currentIndex + 1) % totalSlides;
+        updateSlider();
+    };
+    
+    createDots();
+    updateSlider();
+    
+    let touchStartX = 0;
+    slider.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].screenX;
+    });
+    
+    slider.addEventListener('touchend', function(e) {
+        const touchEndX = e.changedTouches[0].screenX;
+        if (touchEndX < touchStartX - 50) {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            updateSlider();
+        } else if (touchEndX > touchStartX + 50) {
+            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+            updateSlider();
+        }
+    });
+}
+
+// МОДАЛЬНЫЕ ОКНА
 function initModalsClose() {
     const closeButtons = document.querySelectorAll('.close-photo');
     for (let i = 0; i < closeButtons.length; i++) {
@@ -401,7 +478,7 @@ function initModalsClose() {
     };
 }
 
-// ========== УВЕЛИЧЕНИЕ ФОТО ОТЗЫВОВ ==========
+// УВЕЛИЧЕНИЕ ФОТО ОТЗЫВОВ
 function initReviewImageZoom() {
     const clickableImages = document.querySelectorAll('.review-img-clickable');
     const modal = document.getElementById('reviewPhotoModal');
@@ -438,7 +515,7 @@ function initReviewImageZoom() {
     };
 }
 
-// ========== ЗАПУСК ВСЕГО ==========
+// ЗАПУСК
 document.addEventListener('DOMContentLoaded', function() {
     initBurgerMenu();
     initSmoothScroll();
@@ -448,6 +525,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initBookingForm();
     initHeaderVisibility();
     initReviewsSlider();
+    initInteriorSlider();
     initModalsClose();
     initReviewImageZoom();
 });
