@@ -160,7 +160,7 @@ h3 {
     box-shadow: 0 8px 30px rgba(0,0,0,0.35);
 }
 
-/* ГЕРОЙ-БАННЕР - НЕ ТРОГАЛ */
+/* ГЕРОЙ-БАННЕР */
 .hero {
     position: relative;
     background-image: url('https://images2.imgbox.com/b4/68/oQmEhqBi_o.jpg');
@@ -270,7 +270,7 @@ header.scrolled .burger-menu span {
     gap: 12px;
 }
 
-/* БУРГЕР-МЕНЮ - ВСЕ ПУНКТЫ ПОМЕЩАЮТСЯ, КРЕСТИК РОВНЫЙ */
+/* БУРГЕР-МЕНЮ - ИСПРАВЛЕН КРЕСТИК */
 .burger-menu {
     display: none;
     flex-direction: column;
@@ -287,6 +287,7 @@ header.scrolled .burger-menu span {
     border-radius: 2px;
 }
 
+/* При активном состоянии бургера — превращаем полоски в ровный крест */
 .burger-menu.active span:nth-child(1) {
     transform: rotate(45deg) translate(8px, 8px);
 }
@@ -295,6 +296,14 @@ header.scrolled .burger-menu span {
 }
 .burger-menu.active span:nth-child(3) {
     transform: rotate(-45deg) translate(8px, -8px);
+}
+
+/* На телефоне при активном бургере — фиксируем позицию */
+.burger-menu.active {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1001;
 }
 
 header.scrolled .burger-menu span {
@@ -1104,27 +1113,27 @@ header.scrolled .nav-links a:hover {
     }
 }
 
+/* МОДАЛЬНОЕ ОКНО ДЛЯ ФОТО - ПО ЦЕНТРУ, БЕЗ ЗАДЕРЖЕК */
 .photo-modal-content {
-    background: rgba(0,0,0,0.9);
+    background: rgba(0,0,0,0.95);
     border-radius: 20px;
     max-width: 90%;
-    max-width: 900px;
+    width: 900px;
     margin: 0 auto;
-    position: relative;
+    position: fixed;
     top: 50%;
-    transform: translateY(-50%);
-    animation: photoFadeIn 0.25s ease-out;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: photoFadeIn 0.2s ease-out;
     box-shadow: 0 30px 60px rgba(0,0,0,0.5);
 }
 
 @keyframes photoFadeIn {
     from {
         opacity: 0;
-        transform: translateY(-50%) scale(0.95);
     }
     to {
         opacity: 1;
-        transform: translateY(-50%) scale(1);
     }
 }
 
@@ -1652,7 +1661,7 @@ form input:focus, form select:focus, form textarea:focus {
         font-size: 1.2rem;
     }
     
-    /* БУРГЕР-МЕНЮ - ВСЕ ПУНКТЫ ПОМЕЩАЮТСЯ */
+    /* БУРГЕР-МЕНЮ НА ТЕЛЕФОНЕ */
     .burger-menu {
         display: flex;
     }
@@ -1702,18 +1711,6 @@ form input:focus, form select:focus, form textarea:focus {
     
     body.menu-open {
         overflow: hidden;
-    }
-    
-    /* КРЕСТИК РОВНЫЙ */
-    .burger-menu.active {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        z-index: 1001;
-    }
-    
-    .burger-menu.active span {
-        background: white;
     }
     
     .logo-img {
