@@ -50,7 +50,6 @@
 </a>
 
 <main>
-    <!-- БАННЕР НА ВЕСЬ ЭКРАН -->
     <section class="hero">
         <div class="hero-overlay"></div>
         <div class="container hero-content"></div>
@@ -557,7 +556,6 @@
         </div>
     </section>
 
-    <!-- ИНТЕРЬЕР - СЛАЙДЕР -->
     <section id="interior" class="interior-slider-section">
         <div class="container">
             <div class="section-header">
@@ -593,7 +591,6 @@
                 <div class="section-line"></div>
                 <p class="features-subtitle">Инновации, которые делают стрижку быстрее и комфортнее</p>
             </div>
-
             <div class="tech-item">
                 <div class="tech-content">
                     <h3>Экраны с развлекательными программами</h3>
@@ -605,7 +602,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="tech-item reverse">
                 <div class="tech-content">
                     <h3>Терминал оплаты</h3>
@@ -617,7 +613,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="tech-item">
                 <div class="tech-content">
                     <h3>Воздушное мытье головы</h3>
@@ -629,7 +624,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="tech-item reverse">
                 <div class="tech-content">
                     <h3>Высокотехнологичные рабочие места</h3>
@@ -641,7 +635,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="tech-item">
                 <div class="tech-content">
                     <h3>Высокий уровень сервиса</h3>
@@ -672,7 +665,6 @@
         </div>
     </section>
 
-    <!-- СОВЕТЫ ПРОФЕССИОНАЛОВ -->
     <section id="tips" class="tips-section-gost white-fullscreen">
         <div class="container">
             <div class="section-header">
@@ -708,7 +700,6 @@
         </div>
     </section>
 
-    <!-- МОДАЛЬНОЕ ОКНО ДЛЯ СОВЕТОВ -->
     <div id="gostModal" class="modal">
         <div class="modal-content gost-modal-content">
             <div class="modal-header">
@@ -798,6 +789,7 @@
         </div>
     </section>
 
+    <!-- ФОРМА ЗАПИСИ С ДАТОЙ И ВРЕМЕНЕМ -->
     <section id="booking" class="contact-form-section">
         <div class="container">
             <div class="section-header">
@@ -807,10 +799,12 @@
             <div class="booking-wrapper">
                 <form id="booking-form">
                     <h3>Записаться на услугу</h3>
+                    
                     <input type="text" id="userName" placeholder="Ваше имя" required>
                     <input type="tel" id="userPhone" placeholder="Телефон" required>
+                    
                     <select id="userService">
-                        <optgroup label="👩 Женский зал">
+                        <optgroup label="Женский зал">
                             <option>Простая стрижка (299 ₽)</option>
                             <option>Архитектурная стрижка (от 600 ₽)</option>
                             <option>Пикси (650 ₽)</option>
@@ -820,7 +814,7 @@
                             <option>Градуированная стрижка (650 ₽)</option>
                             <option>Многослойная стрижка (750 ₽)</option>
                         </optgroup>
-                        <optgroup label="👨 Мужской зал">
+                        <optgroup label="Мужской зал">
                             <option>Стрижка машинкой (299 ₽)</option>
                             <option>Премиум-стиль (от 500 ₽)</option>
                             <option>Fade (градиентная) (600 ₽)</option>
@@ -830,7 +824,7 @@
                             <option>Текстурная стрижка (600 ₽)</option>
                             <option>Оформление бороды (200 ₽)</option>
                         </optgroup>
-                        <optgroup label="👧 Детский зал">
+                        <optgroup label="Детский зал">
                             <option>Первая стрижка до 3 лет (299 ₽)</option>
                             <option>Простая детская 3-7 лет (299 ₽)</option>
                             <option>Простая детская 7-12 лет (299 ₽)</option>
@@ -839,7 +833,7 @@
                             <option>Стрижка с узором (500 ₽)</option>
                             <option>Подростковая сложная (550 ₽)</option>
                         </optgroup>
-                        <optgroup label="🎨 Окрашивание">
+                        <optgroup label="Окрашивание">
                             <option>Один тон — короткие (3 400 ₽)</option>
                             <option>Один тон — средние (4 100 ₽)</option>
                             <option>Один тон — длинные (5 300 ₽)</option>
@@ -859,7 +853,7 @@
                             <option>Тонирование — средние (3 000 ₽)</option>
                             <option>Тонирование — длинные (4 000 ₽)</option>
                         </optgroup>
-                        <optgroup label="💆‍♀️ Уход и восстановление">
+                        <optgroup label="Уход и восстановление">
                             <option>Кератиновое выпрямление — короткие (4 500 ₽)</option>
                             <option>Кератиновое выпрямление — средние (5 500 ₽)</option>
                             <option>Кератиновое выпрямление — длинные (7 000 ₽)</option>
@@ -870,7 +864,7 @@
                             <option>Полировка волос — средние (3 000 ₽)</option>
                             <option>Полировка волос — длинные (4 000 ₽)</option>
                         </optgroup>
-                        <optgroup label="✨ Дополнительно">
+                        <optgroup label="Дополнительно">
                             <option>Объемная укладка (600 ₽)</option>
                             <option>Укладка с выпрямлением (700 ₽)</option>
                             <option>Локоны / кудри (800 ₽)</option>
@@ -882,8 +876,37 @@
                             <option>Лечение волос (от 1 000 ₽)</option>
                         </optgroup>
                     </select>
-                    <textarea rows="3" placeholder="Пожелания (дата, время, дополнительные вопросы)"></textarea>
-                    <button type="submit" class="btn">Отправить заявку</button>
+                    
+                    <!-- ДАТА И ВРЕМЯ -->
+                    <input type="date" id="bookingDate" required>
+                    <select id="bookingTime" required>
+                        <option value="">-- Выберите время --</option>
+                        <option value="10:00">10:00</option>
+                        <option value="10:30">10:30</option>
+                        <option value="11:00">11:00</option>
+                        <option value="11:30">11:30</option>
+                        <option value="12:00">12:00</option>
+                        <option value="12:30">12:30</option>
+                        <option value="13:00">13:00</option>
+                        <option value="13:30">13:30</option>
+                        <option value="14:00">14:00</option>
+                        <option value="14:30">14:30</option>
+                        <option value="15:00">15:00</option>
+                        <option value="15:30">15:30</option>
+                        <option value="16:00">16:00</option>
+                        <option value="16:30">16:30</option>
+                        <option value="17:00">17:00</option>
+                        <option value="17:30">17:30</option>
+                        <option value="18:00">18:00</option>
+                        <option value="18:30">18:30</option>
+                        <option value="19:00">19:00</option>
+                        <option value="19:30">19:30</option>
+                    </select>
+                    
+                    <div id="timeSlotStatus" class="time-slot-status"></div>
+                    
+                    <textarea rows="3" placeholder="Пожелания (дополнительные вопросы)"></textarea>
+                    <button type="submit" class="btn" id="submitBtn">Отправить заявку</button>
                     <p class="form-note">Нажимая кнопку, вы соглашаетесь на обработку данных</p>
                 </form>
             </div>
