@@ -121,7 +121,7 @@ function initLogoLink() {
     }
 }
 
-// КНОПКИ УСЛУГ
+// КНОПКИ УСЛУГ - ИСПРАВЛЕН БАГ (соседние карточки не растягиваются)
 function initServiceButtons() {
     const detailButtons = document.querySelectorAll('.service-detail-btn');
     for (let i = 0; i < detailButtons.length; i++) {
@@ -134,6 +134,8 @@ function initServiceButtons() {
                 const allWrappers = document.querySelectorAll('.service-details-wrapper');
                 for (let j = 0; j < allWrappers.length; j++) {
                     allWrappers[j].style.display = 'none';
+                    const btn = allWrappers[j].closest('.service-card').querySelector('.service-detail-btn');
+                    if (btn) btn.textContent = 'Подробнее';
                 }
                 detailsWrapper.style.display = 'block';
                 this.textContent = 'Скрыть';
