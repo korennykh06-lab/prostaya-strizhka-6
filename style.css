@@ -30,7 +30,7 @@ main {
     padding: 0 40px;
 }
 
-/* ЯПОНСКИЙ ШРИФТ ДЛЯ ВСЕХ ЗАГОЛОВКОВ */
+/* ЯПОНСКИЙ ШРИФТ ДЛЯ ЗАГОЛОВКОВ */
 h1, h2, h3, h4, .logo-title, .footer-title, .category-title-light,
 .aesthetics-section-title, .trend-content h3, .service-name,
 .about-text h3, .feature-card h3, .tech-content h3, .tip-card-gost h3 {
@@ -61,6 +61,13 @@ h3 {
     background: linear-gradient(90deg, transparent, #5BA4CF, #5BA4CF, transparent);
     margin: 1rem auto 0;
     border-radius: 2px;
+}
+
+.services-subtitle {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 1rem;
+    color: #666;
 }
 
 .section-padding {
@@ -146,14 +153,15 @@ h3 {
     box-shadow: 0 8px 30px rgba(0,0,0,0.35);
 }
 
-/* ГЕРОЙ-БАННЕР - СЛЕГКА ПОСВЕТЛЕЛ */
+/* ГЕРОЙ-БАННЕР - НА ВЕСЬ ЭКРАН */
 .hero {
     position: relative;
     background-image: url('https://images2.imgbox.com/b4/68/oQmEhqBi_o.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    min-height: 90vh;
+    min-height: 100vh;
+    width: 100%;
     display: flex;
     align-items: center;
 }
@@ -164,7 +172,7 @@ h3 {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.22);
+    background: rgba(0, 0, 0, 0.05);
     z-index: 1;
 }
 
@@ -174,7 +182,7 @@ h3 {
     width: 100%;
 }
 
-/* ШАПКА - БЕЗ ПОДЧЁРКИВАНИЯ */
+/* ШАПКА */
 header {
     position: fixed;
     top: -120px;
@@ -738,7 +746,7 @@ header.scrolled .nav-links a:hover {
     border-radius: 30px;
 }
 
-/* ИНТЕРЬЕР - СЛАЙДЕР С БОЛЬШИМИ ФОТО */
+/* ИНТЕРЬЕР - СЛАЙДЕР */
 .interior-slider-section {
     background: white;
     padding: 60px 0;
@@ -804,7 +812,7 @@ header.scrolled .nav-links a:hover {
     margin-top: 25px;
 }
 
-.dot {
+.slider-dots .dot {
     width: 12px;
     height: 12px;
     background: rgba(0,0,0,0.3);
@@ -813,7 +821,7 @@ header.scrolled .nav-links a:hover {
     transition: all 0.3s;
 }
 
-.dot.active {
+.slider-dots .dot.active {
     background: #5BA4CF;
     width: 30px;
     border-radius: 6px;
@@ -989,6 +997,7 @@ header.scrolled .nav-links a:hover {
     transform: scale(1.03);
 }
 
+/* СОВЕТЫ */
 .tips-section-gost {
     padding: 60px 0;
     background: #ffffff;
@@ -1052,6 +1061,7 @@ header.scrolled .nav-links a:hover {
     color: white;
 }
 
+/* МОДАЛЬНОЕ ОКНО ДЛЯ СОВЕТОВ */
 .modal {
     display: none;
     position: fixed;
@@ -1070,6 +1080,18 @@ header.scrolled .nav-links a:hover {
     width: 90%;
     max-width: 700px;
     border-radius: 20px;
+    animation: modalFadeIn 0.3s ease;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .photo-modal-content {
@@ -1088,10 +1110,13 @@ header.scrolled .nav-links a:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background: white;
+    border-radius: 20px 20px 0 0;
 }
 
 .modal-header h2 {
     font-size: 1.6rem;
+    font-family: 'Noto Serif JP', serif;
 }
 
 .close-modal {
@@ -1110,10 +1135,22 @@ header.scrolled .nav-links a:hover {
     max-height: 65vh;
     overflow-y: auto;
     line-height: 1.6;
+    background: white;
+    border-radius: 0 0 20px 20px;
+}
+
+.gost-modal-body ul {
+    margin: 15px 0;
+    padding-left: 20px;
+}
+
+.gost-modal-body li {
+    margin-bottom: 8px;
 }
 
 .photo-modal-body {
     text-align: center;
+    background: transparent;
 }
 
 .service-photo-img {
@@ -1132,6 +1169,7 @@ header.scrolled .nav-links a:hover {
     opacity: 0.95;
 }
 
+/* БРЕНДЫ */
 .brands-fullscreen {
     position: relative;
     padding: 60px 0;
@@ -1203,6 +1241,7 @@ header.scrolled .nav-links a:hover {
     border-bottom-color: #5BA4CF;
 }
 
+/* ТРЕНДЫ */
 .trends-section {
     padding: 60px 0;
     background: #ffffff;
@@ -1248,6 +1287,7 @@ header.scrolled .nav-links a:hover {
     font-weight: 500;
 }
 
+/* ОТЗЫВЫ */
 .reviews-section-clean {
     position: relative;
     padding: 80px 0;
@@ -1336,6 +1376,7 @@ header.scrolled .nav-links a:hover {
     border-radius: 4px;
 }
 
+/* ФОРМА ЗАПИСИ */
 .contact-form-section {
     padding: 60px 0;
     background: #ffffff;
@@ -1401,6 +1442,7 @@ form input:focus, form select:focus, form textarea:focus {
     filter: grayscale(0%);
 }
 
+/* ФУТЕР */
 .large-footer {
     background: #5BA4CF;
     color: white;
@@ -1501,41 +1543,14 @@ form input:focus, form select:focus, form textarea:focus {
     opacity: 0.8;
 }
 
-/* АДАПТАЦИЯ */
-@media (max-width: 992px) {
-    .container {
-        padding: 0 25px;
-    }
-    .footer-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    .tips-grid-gost {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    .sterility-row {
-        flex-direction: column;
-    }
-    h2 {
-        font-size: 2.2rem;
-    }
-    .trends-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    .brands-list {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    .slide img {
-        height: 450px;
-    }
-}
-
+/* ===== АДАПТАЦИЯ ПОД ТЕЛЕФОН ===== */
 @media (max-width: 768px) {
     .container {
         padding: 0 20px;
     }
     
     body {
-        font-size: 15px;
+        font-size: 16px;
     }
     
     h2 {
@@ -1550,46 +1565,11 @@ form input:focus, form select:focus, form textarea:focus {
         font-size: 1.5rem;
     }
     
-    .feature-card h3 {
-        font-size: 1.1rem;
-    }
-    
-    .feature-card p {
-        font-size: 0.85rem;
-    }
-    
-    .about-text h3 {
-        font-size: 1.6rem;
-    }
-    
-    .about-text p {
-        font-size: 0.9rem;
-    }
-    
     .service-name {
         font-size: 1.2rem;
     }
     
-    .service-price {
-        font-size: 1rem;
-    }
-    
-    .tech-content h3 {
-        font-size: 1.4rem;
-    }
-    
-    .tech-content p {
-        font-size: 0.9rem;
-    }
-    
-    .aesthetics-section-title {
-        font-size: 1.8rem;
-    }
-    
-    .trend-content h3 {
-        font-size: 1.1rem;
-    }
-    
+    /* БУРГЕР-МЕНЮ НА ВЕСЬ ЭКРАН */
     .burger-menu {
         display: flex;
     }
@@ -1598,17 +1578,16 @@ form input:focus, form select:focus, form textarea:focus {
         position: fixed;
         top: 0;
         right: -100%;
-        width: 280px;
+        width: 100%;
         height: 100vh;
         background: #5BA4CF;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        gap: 15px;
+        gap: 20px;
         transition: right 0.3s ease;
         z-index: 1000;
-        padding: 20px;
-        box-shadow: -5px 0 30px rgba(0,0,0,0.3);
+        padding: 80px 20px 40px;
     }
     
     .nav-links.active {
@@ -1616,9 +1595,9 @@ form input:focus, form select:focus, form textarea:focus {
     }
     
     .nav-links a {
-        font-size: 1rem;
+        font-size: 1.2rem;
         color: white;
-        padding: 12px 20px;
+        padding: 15px 20px;
         width: 100%;
         text-align: center;
         border-bottom: 1px solid rgba(255,255,255,0.2);
@@ -1629,13 +1608,20 @@ form input:focus, form select:focus, form textarea:focus {
     }
     
     .nav-links a:hover {
-        background: rgba(255,255,255,0.2);
-        border-radius: 10px;
+        background: rgba(255,255,255,0.15);
+        border-radius: 12px;
         color: white;
     }
     
     body.menu-open {
         overflow: hidden;
+    }
+    
+    .burger-menu.active {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1001;
     }
     
     .logo-img {
@@ -1711,11 +1697,6 @@ form input:focus, form select:focus, form textarea:focus {
         height: 280px;
     }
     
-    .sterility-bg,
-    .brands-bg {
-        background-attachment: scroll;
-    }
-    
     .slide img {
         height: 350px;
     }
@@ -1725,6 +1706,34 @@ form input:focus, form select:focus, form textarea:focus {
         height: 40px;
         font-size: 20px;
     }
+    
+    .brands-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .hero {
+        min-height: 60vh;
+        background-position: center;
+    }
+    
+    .hero-overlay {
+        background: rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Модальное окно на телефоне */
+    .gost-modal-content {
+        margin: 20px auto;
+        width: 95%;
+    }
+    
+    .modal-header h2 {
+        font-size: 1.3rem;
+    }
+    
+    .gost-modal-body {
+        padding: 20px;
+        font-size: 14px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -1733,7 +1742,7 @@ form input:focus, form select:focus, form textarea:focus {
     }
     
     body {
-        font-size: 14px;
+        font-size: 16px;
     }
     
     h2 {
@@ -1758,42 +1767,24 @@ form input:focus, form select:focus, form textarea:focus {
         height: 200px;
     }
     
-    .nav-links {
-        width: 260px;
-        gap: 10px;
+    .service-photo-btn {
+        min-width: 120px;
+        font-size: 0.7rem;
     }
     
-    .nav-links a {
-        font-size: 0.9rem;
-        padding: 10px 15px;
-    }
-    
-    form {
-        padding: 20px;
-    }
-    
-    form select {
-        font-size: 0.85rem;
-    }
-    
-    .brand-link {
-        font-size: 0.85rem;
+    .slide img {
+        height: 280px;
     }
     
     .brands-list {
         grid-template-columns: 1fr;
     }
     
-    .service-photo-btn {
-        min-width: 120px;
-        font-size: 0.7rem;
+    .brand-link {
+        font-size: 0.9rem;
     }
     
-    .modal-header h2 {
-        font-size: 1.2rem;
-    }
-    
-    .slide img {
-        height: 280px;
+    .hero {
+        min-height: 50vh;
     }
 }
