@@ -39,9 +39,9 @@ function openServicePhoto(serviceId) {
     }
     
     img.src = photoUrl;
-    modal.style.display = 'flex';
-    modal.style.alignItems = 'center';
-    modal.style.justifyContent = 'center';
+    
+    // Мгновенное открытие по центру
+    modal.style.display = 'block';
     document.body.style.overflow = 'hidden';
     
     const closeOnEscape = function(e) {
@@ -121,7 +121,7 @@ function initLogoLink() {
     }
 }
 
-// КНОПКИ УСЛУГ - ИСПРАВЛЕН БАГ (соседние карточки не растягиваются)
+// КНОПКИ УСЛУГ
 function initServiceButtons() {
     const detailButtons = document.querySelectorAll('.service-detail-btn');
     for (let i = 0; i < detailButtons.length; i++) {
@@ -548,9 +548,7 @@ function initReviewImageZoom() {
             const imgSrc = this.getAttribute('data-review-img');
             if (imgSrc) {
                 modalImg.src = imgSrc;
-                modal.style.display = 'flex';
-                modal.style.alignItems = 'center';
-                modal.style.justifyContent = 'center';
+                modal.style.display = 'block';
                 document.body.style.overflow = 'hidden';
             }
         };
