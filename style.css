@@ -97,6 +97,13 @@ h3 {
     box-shadow: 0 8px 25px rgba(0,0,0,0.15);
 }
 
+.btn.disabled, .btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
 /* ПЛАВАЮЩАЯ КНОПКА */
 .floating-btn {
     position: fixed;
@@ -153,7 +160,7 @@ h3 {
     box-shadow: 0 8px 30px rgba(0,0,0,0.35);
 }
 
-/* ГЕРОЙ-БАННЕР - НА ВЕСЬ ЭКРАН */
+/* ГЕРОЙ-БАННЕР */
 .hero {
     position: relative;
     background-image: url('https://images2.imgbox.com/b4/68/oQmEhqBi_o.jpg');
@@ -263,20 +270,21 @@ header.scrolled .burger-menu span {
     gap: 12px;
 }
 
+/* БУРГЕР-МЕНЮ */
 .burger-menu {
     display: none;
     flex-direction: column;
     cursor: pointer;
-    gap: 5px;
+    gap: 6px;
     z-index: 1001;
 }
 
 .burger-menu span {
     width: 28px;
-    height: 3px;
+    height: 2px;
     background: #2A2A2A;
     transition: all 0.3s ease;
-    border-radius: 3px;
+    border-radius: 2px;
 }
 
 .burger-menu.active span:nth-child(1) {
@@ -517,6 +525,7 @@ header.scrolled .nav-links a:hover {
     border-color: #5BA4CF;
 }
 
+/* ИСХОДНЫЙ СТИЛЬ РАСКРЫВАЮЩЕГОСЯ ОКНА */
 .service-details-wrapper {
     margin-top: 12px;
     padding-top: 10px;
@@ -1061,7 +1070,7 @@ header.scrolled .nav-links a:hover {
     color: white;
 }
 
-/* МОДАЛЬНОЕ ОКНО ДЛЯ СОВЕТОВ */
+/* МОДАЛЬНЫЕ ОКНА */
 .modal {
     display: none;
     position: fixed;
@@ -1095,13 +1104,48 @@ header.scrolled .nav-links a:hover {
 }
 
 .photo-modal-content {
-    background: transparent;
-    margin: auto;
-    width: 90%;
+    background: rgba(0,0,0,0.9);
+    border-radius: 24px;
+    max-width: 90%;
     max-width: 900px;
+    margin: auto;
     position: relative;
     top: 50%;
     transform: translateY(-50%);
+    animation: photoFadeIn 0.25s ease-out;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+}
+
+@keyframes photoFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50%) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(-50%) scale(1);
+    }
+}
+
+.photo-modal-content .modal-header {
+    background: transparent;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    padding: 20px 25px;
+    border-radius: 24px 24px 0 0;
+}
+
+.photo-modal-content .modal-header h2 {
+    color: white;
+    font-size: 1.5rem;
+}
+
+.photo-modal-content .close-modal {
+    color: rgba(255,255,255,0.6);
+    font-size: 32px;
+}
+
+.photo-modal-content .close-modal:hover {
+    color: #5BA4CF;
 }
 
 .modal-header {
@@ -1120,10 +1164,13 @@ header.scrolled .nav-links a:hover {
 }
 
 .close-modal {
-    font-size: 2rem;
+    font-size: 28px;
+    font-weight: 400;
     cursor: pointer;
     color: #999;
     transition: color 0.3s;
+    line-height: 1;
+    font-family: monospace;
 }
 
 .close-modal:hover {
@@ -1151,13 +1198,14 @@ header.scrolled .nav-links a:hover {
 .photo-modal-body {
     text-align: center;
     background: transparent;
+    padding: 20px;
 }
 
 .service-photo-img {
-    max-width: 100%;
-    max-height: 85vh;
+    width: 100%;
+    max-height: 75vh;
     object-fit: contain;
-    border-radius: 8px;
+    border-radius: 16px;
 }
 
 .review-img-clickable {
@@ -1417,6 +1465,33 @@ form input:focus, form select:focus, form textarea:focus {
     border-bottom-color: #5BA4CF;
 }
 
+#bookingDate, #bookingTime {
+    background: #f9f9f9;
+    border-radius: 12px;
+    padding: 12px 15px;
+    border: 1px solid #e0e0e0;
+}
+
+.time-slot-status {
+    margin: -10px 0 20px 0;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    text-align: center;
+}
+
+.time-slot-status.available {
+    background: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #a5d6a7;
+}
+
+.time-slot-status.booked {
+    background: #ffebee;
+    color: #c62828;
+    border: 1px solid #ef9a9a;
+}
+
 .form-note {
     font-size: 0.7rem;
     text-align: center;
@@ -1569,7 +1644,6 @@ form input:focus, form select:focus, form textarea:focus {
         font-size: 1.2rem;
     }
     
-    /* БУРГЕР-МЕНЮ НА ВЕСЬ ЭКРАН */
     .burger-menu {
         display: flex;
     }
@@ -1577,21 +1651,25 @@ form input:focus, form select:focus, form textarea:focus {
     .nav-links {
         position: fixed;
         top: 0;
-        right: -100%;
+        left: 0;
+        right: 0;
+        bottom: 0;
         width: 100%;
-        height: 100vh;
+        height: 100%;
         background: #5BA4CF;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         gap: 20px;
-        transition: right 0.3s ease;
+        transition: transform 0.3s ease;
         z-index: 1000;
         padding: 80px 20px 40px;
+        transform: translateX(100%);
+        overflow-y: auto;
     }
     
     .nav-links.active {
-        right: 0;
+        transform: translateX(0);
     }
     
     .nav-links a {
@@ -1622,6 +1700,10 @@ form input:focus, form select:focus, form textarea:focus {
         top: 20px;
         right: 20px;
         z-index: 1001;
+    }
+    
+    .burger-menu.active span {
+        background: white;
     }
     
     .logo-img {
@@ -1720,7 +1802,6 @@ form input:focus, form select:focus, form textarea:focus {
         background: rgba(0, 0, 0, 0.1);
     }
     
-    /* Модальное окно на телефоне */
     .gost-modal-content {
         margin: 20px auto;
         width: 95%;
@@ -1732,6 +1813,18 @@ form input:focus, form select:focus, form textarea:focus {
     
     .gost-modal-body {
         padding: 20px;
+        font-size: 14px;
+    }
+    
+    .photo-modal-content {
+        width: 95%;
+    }
+    
+    .photo-modal-content .modal-header h2 {
+        font-size: 1.2rem;
+    }
+    
+    #bookingDate, #bookingTime {
         font-size: 14px;
     }
 }
@@ -1765,11 +1858,6 @@ form input:focus, form select:focus, form textarea:focus {
     .tech-image-circle {
         width: 200px;
         height: 200px;
-    }
-    
-    .service-photo-btn {
-        min-width: 120px;
-        font-size: 0.7rem;
     }
     
     .slide img {
