@@ -1,4 +1,4 @@
-// ФОТО ДЛЯ УСЛУГ
+// ============ ФОТО ДЛЯ УСЛУГ ============
 const servicePhotos = {
     simple_woman: 'https://i.pinimg.com/1200x/97/ea/3a/97ea3ab88d3586ba070665fddd8e0640.jpg',
     architectural_woman: 'https://i.pinimg.com/1200x/bb/82/47/bb82478544b01929cb37416cf26fe65e.jpg',
@@ -20,6 +20,7 @@ const servicePhotos = {
     treatment: 'https://i.pinimg.com/1200x/9f/48/d9/9f48d9b47bc4cc686520ec8acc13fda3.jpg'
 };
 
+// ============ ОТКРЫТИЕ ФОТО УСЛУГИ ============
 function openServicePhoto(serviceId) {
     const modal = document.getElementById('servicePhotoModal');
     const title = document.getElementById('photoModalTitle');
@@ -39,8 +40,6 @@ function openServicePhoto(serviceId) {
     }
     
     img.src = photoUrl;
-    
-    // Мгновенное открытие по центру
     modal.style.display = 'block';
     document.body.style.overflow = 'hidden';
     
@@ -61,7 +60,7 @@ function closeServicePhotoModal() {
     }
 }
 
-// БУРГЕР-МЕНЮ
+// ============ БУРГЕР-МЕНЮ ============
 function initBurgerMenu() {
     const burger = document.getElementById('burgerMenu');
     const nav = document.getElementById('navLinks');
@@ -94,7 +93,7 @@ function initBurgerMenu() {
     }
 }
 
-// ПЛАВНЫЙ СКРОЛЛ
+// ============ ПЛАВНЫЙ СКРОЛЛ ============
 function initSmoothScroll() {
     const links = document.querySelectorAll('a[href^="#"]');
     for (let i = 0; i < links.length; i++) {
@@ -110,7 +109,7 @@ function initSmoothScroll() {
     }
 }
 
-// ЛОГОТИП
+// ============ ЛОГОТИП ============
 function initLogoLink() {
     const logoLink = document.getElementById('logoLink');
     if (logoLink) {
@@ -121,7 +120,7 @@ function initLogoLink() {
     }
 }
 
-// КНОПКИ УСЛУГ
+// ============ КНОПКИ УСЛУГ ============
 function initServiceButtons() {
     const detailButtons = document.querySelectorAll('.service-detail-btn');
     for (let i = 0; i < detailButtons.length; i++) {
@@ -157,7 +156,7 @@ function initServiceButtons() {
     }
 }
 
-// СОВЕТЫ
+// ============ СОВЕТЫ (МОДАЛЬНОЕ ОКНО) ============
 const tipsData = {
     1: { 
         title: 'Как правильно выбрать расчёску?', 
@@ -222,7 +221,28 @@ function initTipsButtons() {
     };
 }
 
-// ФОРМА ЗАПИСИ
+// ============ ОТПРАВКА В GOOGLE SHEETS ============
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz01c2iyjFLSkuggN_pRviSBev1rlHhmVM5WsUQG7Nb2wVKkMzdWMtys8vqOzslW-gfvQ/exec';
+
+async function sendToGoogleSheets(bookingData) {
+    try {
+        await fetch(GOOGLE_SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(bookingData)
+        });
+        console.log('✅ Данные отправлены в Google Sheets');
+        return true;
+    } catch (error) {
+        console.error('❌ Ошибка отправки:', error);
+        return false;
+    }
+}
+
+// ============ ФОРМА ЗАПИСИ ============
 let bookedSlots = JSON.parse(localStorage.getItem('bookedSlots')) || {};
 
 function saveBookedSlots() {
@@ -277,6 +297,7 @@ function initBookingForm() {
     const phoneInput = document.getElementById('userPhone');
     const dateInput = document.getElementById('bookingDate');
     const timeSelect = document.getElementById('bookingTime');
+    const commentTextarea = document.querySelector('#booking-form textarea');
     
     if (dateInput) {
         const today = new Date().toISOString().split('T')[0];
@@ -316,8 +337,9 @@ function initBookingForm() {
         });
     }
     
-    form.addEventListener('submit', function(e) {
+    form.addEventListener('submit', async function(e) {
         e.preventDefault();
+        
         let isValid = true;
         let errorMessage = '';
         
@@ -356,19 +378,36 @@ function initBookingForm() {
             isValid = false;
         }
         
+        const comment = commentTextarea ? commentTextarea.value : '';
+        
         if (isValid && selectedDate && selectedTime && checkTimeSlot(selectedDate, selectedTime)) {
             errorMessage += '• Выбранное время уже занято. Пожалуйста, выберите другое время.\n';
             isValid = false;
         }
         
         if (isValid) {
+            // Отправляем в Google Sheets
+            const bookingData = {
+                date: selectedDate,
+                time: selectedTime,
+                name: name,
+                phone: phone,
+                service: selectedService,
+                comment: comment
+            };
+            await sendToGoogleSheets(bookingData);
+            
+            // Сохраняем в localStorage
             const key = `${selectedDate}_${selectedTime}`;
             bookedSlots[key] = true;
             saveBookedSlots();
+            
             const formattedDate = new Date(selectedDate).toLocaleDateString('ru-RU', {
                 day: 'numeric', month: 'long', year: 'numeric'
             });
+            
             alert('Спасибо, ' + name + '!\n\nВы записаны на:\n📅 ' + formattedDate + '\n⏰ ' + selectedTime + '\n💇 ' + selectedService + '\n\nМы свяжемся с вами в ближайшее время.');
+            
             form.reset();
             if (phoneInput) phoneInput.value = '+7 ';
             if (dateInput) dateInput.value = '';
@@ -381,7 +420,7 @@ function initBookingForm() {
     });
 }
 
-// ШАПКА ПРИ СКРОЛЛЕ
+// ============ ШАПКА ПРИ СКРОЛЛЕ ============
 function initHeaderVisibility() {
     const header = document.getElementById('mainHeader');
     if (!header) return;
@@ -399,7 +438,7 @@ function initHeaderVisibility() {
     });
 }
 
-// СЛАЙДЕР ОТЗЫВОВ
+// ============ СЛАЙДЕР ОТЗЫВОВ ============
 function initReviewsSlider() {
     const track = document.getElementById('reviewsTrack');
     const prev = document.getElementById('prevReviewBtn');
@@ -459,7 +498,7 @@ function initReviewsSlider() {
     update();
 }
 
-// СЛАЙДЕР ИНТЕРЬЕРА
+// ============ СЛАЙДЕР ИНТЕРЬЕРА ============
 function initInteriorSlider() {
     const slider = document.getElementById('interiorSlider');
     const prevBtn = document.getElementById('prevSlide');
@@ -518,7 +557,7 @@ function initInteriorSlider() {
     });
 }
 
-// МОДАЛЬНЫЕ ОКНА
+// ============ МОДАЛЬНЫЕ ОКНА ============
 function initModalsClose() {
     const closeButtons = document.querySelectorAll('.close-photo');
     for (let i = 0; i < closeButtons.length; i++) {
@@ -532,7 +571,7 @@ function initModalsClose() {
     };
 }
 
-// УВЕЛИЧЕНИЕ ФОТО ОТЗЫВОВ
+// ============ УВЕЛИЧЕНИЕ ФОТО ОТЗЫВОВ ============
 function initReviewImageZoom() {
     const clickableImages = document.querySelectorAll('.review-img-clickable');
     const modal = document.getElementById('reviewPhotoModal');
@@ -560,7 +599,7 @@ function initReviewImageZoom() {
     };
 }
 
-// ЗАПУСК
+// ============ ЗАПУСК ВСЕХ ФУНКЦИЙ ============
 document.addEventListener('DOMContentLoaded', function() {
     initBurgerMenu();
     initSmoothScroll();
