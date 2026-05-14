@@ -39,8 +39,18 @@ function openServicePhoto(serviceId) {
     }
     
     img.src = photoUrl;
-    modal.style.display = 'block';
+    modal.style.display = 'flex';
+    modal.style.alignItems = 'center';
+    modal.style.justifyContent = 'center';
     document.body.style.overflow = 'hidden';
+    
+    const closeOnEscape = function(e) {
+        if (e.key === 'Escape') {
+            closeServicePhotoModal();
+            document.removeEventListener('keydown', closeOnEscape);
+        }
+    };
+    document.addEventListener('keydown', closeOnEscape);
 }
 
 function closeServicePhotoModal() {
@@ -51,7 +61,7 @@ function closeServicePhotoModal() {
     }
 }
 
-// БУРГЕР-МЕНЮ (НА ВЕСЬ ЭКРАН)
+// БУРГЕР-МЕНЮ
 function initBurgerMenu() {
     const burger = document.getElementById('burgerMenu');
     const nav = document.getElementById('navLinks');
@@ -145,7 +155,7 @@ function initServiceButtons() {
     }
 }
 
-// СОВЕТЫ - МОДАЛЬНОЕ ОКНО
+// СОВЕТЫ
 const tipsData = {
     1: { 
         title: 'Как правильно выбрать расчёску?', 
@@ -202,7 +212,6 @@ function initTipsButtons() {
         closeGost.onclick = closeGostModal;
     }
     
-    // Закрытие по клику вне модального окна
     window.onclick = function(event) {
         const modal = document.getElementById('gostModal');
         if (event.target === modal) {
@@ -212,12 +221,71 @@ function initTipsButtons() {
 }
 
 // ФОРМА ЗАПИСИ
+let bookedSlots = JSON.parse(localStorage.getItem('bookedSlots')) || {};
+
+function saveBookedSlots() {
+    localStorage.setItem('bookedSlots', JSON.stringify(bookedSlots));
+}
+
+function checkTimeSlot(date, time) {
+    const key = `${date}_${time}`;
+    return bookedSlots[key] === true;
+}
+
+function updateTimeSlotStatus() {
+    const dateInput = document.getElementById('bookingDate');
+    const timeSelect = document.getElementById('bookingTime');
+    const statusDiv = document.getElementById('timeSlotStatus');
+    const submitBtn = document.getElementById('submitBtn');
+    
+    if (!dateInput || !timeSelect || !statusDiv || !submitBtn) return;
+    
+    const selectedDate = dateInput.value;
+    const selectedTime = timeSelect.value;
+    
+    if (!selectedDate || !selectedTime) {
+        statusDiv.style.display = 'none';
+        submitBtn.disabled = false;
+        submitBtn.classList.remove('disabled');
+        return;
+    }
+    
+    const isBooked = checkTimeSlot(selectedDate, selectedTime);
+    
+    if (isBooked) {
+        statusDiv.innerHTML = '❌ Это время уже занято. Пожалуйста, выберите другое время.';
+        statusDiv.className = 'time-slot-status booked';
+        statusDiv.style.display = 'block';
+        submitBtn.disabled = true;
+        submitBtn.classList.add('disabled');
+    } else {
+        statusDiv.innerHTML = '✅ Это время свободно! Можете записываться.';
+        statusDiv.className = 'time-slot-status available';
+        statusDiv.style.display = 'block';
+        submitBtn.disabled = false;
+        submitBtn.classList.remove('disabled');
+    }
+}
+
 function initBookingForm() {
     const form = document.getElementById('booking-form');
     if (!form) return;
     
     const nameInput = document.getElementById('userName');
     const phoneInput = document.getElementById('userPhone');
+    const dateInput = document.getElementById('bookingDate');
+    const timeSelect = document.getElementById('bookingTime');
+    
+    if (dateInput) {
+        const today = new Date().toISOString().split('T')[0];
+        dateInput.min = today;
+        const maxDate = new Date();
+        maxDate.setDate(maxDate.getDate() + 30);
+        dateInput.max = maxDate.toISOString().split('T')[0];
+    }
+    
+    if (dateInput) dateInput.addEventListener('change', updateTimeSlotStatus);
+    if (timeSelect) timeSelect.addEventListener('change', updateTimeSlotStatus);
     
     if (nameInput) {
         nameInput.addEventListener('input', function() {
@@ -228,47 +296,26 @@ function initBookingForm() {
     if (phoneInput) {
         phoneInput.addEventListener('input', function(e) {
             let value = this.value.replace(/\D/g, '');
-            
             if (value.length === 0) {
                 this.value = '+7';
                 return;
             }
-            
-            if (!value.startsWith('7')) {
-                value = '7' + value;
-            }
-            
-            if (value.length > 11) {
-                value = value.substring(0, 11);
-            }
-            
+            if (!value.startsWith('7')) value = '7' + value;
+            if (value.length > 11) value = value.substring(0, 11);
             let formatted = '+7';
-            if (value.length > 1) {
-                formatted += ' ' + value.substring(1, 4);
-            }
-            if (value.length > 4) {
-                formatted += ' ' + value.substring(4, 7);
-            }
-            if (value.length > 7) {
-                formatted += ' ' + value.substring(7, 9);
-            }
-            if (value.length > 9) {
-                formatted += ' ' + value.substring(9, 11);
-            }
-            
+            if (value.length > 1) formatted += ' ' + value.substring(1, 4);
+            if (value.length > 4) formatted += ' ' + value.substring(4, 7);
+            if (value.length > 7) formatted += ' ' + value.substring(7, 9);
+            if (value.length > 9) formatted += ' ' + value.substring(9, 11);
             this.value = formatted.trim();
         });
-        
         phoneInput.addEventListener('focus', function() {
-            if (!this.value || this.value === '') {
-                this.value = '+7 ';
-            }
+            if (!this.value || this.value === '') this.value = '+7 ';
         });
     }
     
     form.addEventListener('submit', function(e) {
         e.preventDefault();
-        
         let isValid = true;
         let errorMessage = '';
         
@@ -288,12 +335,44 @@ function initBookingForm() {
             isValid = false;
         }
         
+        const selectedDate = dateInput ? dateInput.value : '';
+        if (!selectedDate) {
+            errorMessage += '• Выберите дату\n';
+            isValid = false;
+        }
+        
+        const selectedTime = timeSelect ? timeSelect.value : '';
+        if (!selectedTime) {
+            errorMessage += '• Выберите время\n';
+            isValid = false;
+        }
+        
+        const serviceSelect = document.getElementById('userService');
+        const selectedService = serviceSelect ? serviceSelect.options[serviceSelect.selectedIndex]?.text : '';
+        if (!selectedService) {
+            errorMessage += '• Выберите услугу\n';
+            isValid = false;
+        }
+        
+        if (isValid && selectedDate && selectedTime && checkTimeSlot(selectedDate, selectedTime)) {
+            errorMessage += '• Выбранное время уже занято. Пожалуйста, выберите другое время.\n';
+            isValid = false;
+        }
+        
         if (isValid) {
-            const serviceSelect = document.getElementById('userService');
-            const selectedService = serviceSelect ? serviceSelect.options[serviceSelect.selectedIndex].text : '';
-            alert('Спасибо, ' + name + '!\n\nВы записаны на: ' + selectedService + '\n\nМы свяжемся с вами в ближайшее время для подтверждения записи.');
+            const key = `${selectedDate}_${selectedTime}`;
+            bookedSlots[key] = true;
+            saveBookedSlots();
+            const formattedDate = new Date(selectedDate).toLocaleDateString('ru-RU', {
+                day: 'numeric', month: 'long', year: 'numeric'
+            });
+            alert('Спасибо, ' + name + '!\n\nВы записаны на:\n📅 ' + formattedDate + '\n⏰ ' + selectedTime + '\n💇 ' + selectedService + '\n\nМы свяжемся с вами в ближайшее время.');
             form.reset();
             if (phoneInput) phoneInput.value = '+7 ';
+            if (dateInput) dateInput.value = '';
+            if (timeSelect) timeSelect.value = '';
+            const statusDiv = document.getElementById('timeSlotStatus');
+            if (statusDiv) statusDiv.style.display = 'none';
         } else {
             alert('Пожалуйста, исправьте ошибки:\n' + errorMessage);
         }
@@ -304,19 +383,14 @@ function initBookingForm() {
 function initHeaderVisibility() {
     const header = document.getElementById('mainHeader');
     if (!header) return;
-    
     window.addEventListener('scroll', function() {
         const currentScroll = window.scrollY;
         const heroSection = document.querySelector('.hero');
         const heroHeight = heroSection ? heroSection.offsetHeight : window.innerHeight;
-        
         if (currentScroll > heroHeight - 100) {
             header.classList.add('visible');
-            if (currentScroll > heroHeight + 100) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
+            if (currentScroll > heroHeight + 100) header.classList.add('scrolled');
+            else header.classList.remove('scrolled');
         } else {
             header.classList.remove('visible', 'scrolled');
         }
@@ -329,35 +403,26 @@ function initReviewsSlider() {
     const prev = document.getElementById('prevReviewBtn');
     const next = document.getElementById('nextReviewBtn');
     const dotsContainer = document.getElementById('reviewDots');
-    
     if (!track || !prev || !next) return;
-    
     const cards = document.querySelectorAll('.review-card-clean');
     if (cards.length === 0) return;
-    
     let current = 0;
     let visible = window.innerWidth <= 768 ? 1 : 2;
-    
     function update() {
         const cardWidth = cards[0] ? cards[0].offsetWidth : 300;
         const gap = 20;
         track.style.transform = 'translateX(' + (-current * (cardWidth + gap)) + 'px)';
         updateDots();
     }
-    
     function updateDots() {
         if (!dotsContainer) return;
         const activeDot = Math.floor(current / visible);
         const dots = document.querySelectorAll('.review-dots .dot');
         for (let i = 0; i < dots.length; i++) {
-            if (i === activeDot) {
-                dots[i].classList.add('active');
-            } else {
-                dots[i].classList.remove('active');
-            }
+            if (i === activeDot) dots[i].classList.add('active');
+            else dots[i].classList.remove('active');
         }
     }
-    
     function createDots() {
         if (!dotsContainer) return;
         dotsContainer.innerHTML = '';
@@ -368,32 +433,26 @@ function initReviewsSlider() {
             if (i === 0) dot.classList.add('active');
             dot.addEventListener('click', function() {
                 current = i * visible;
-                if (current >= cards.length) {
-                    current = Math.max(0, cards.length - visible);
-                }
+                if (current >= cards.length) current = Math.max(0, cards.length - visible);
                 update();
             });
             dotsContainer.appendChild(dot);
         }
     }
-    
     prev.onclick = function() {
         current = current - visible >= 0 ? current - visible : Math.max(0, cards.length - visible);
         update();
     };
-    
     next.onclick = function() {
         current = current + visible < cards.length ? current + visible : 0;
         update();
     };
-    
     window.addEventListener('resize', function() {
         visible = window.innerWidth <= 768 ? 1 : 2;
         current = 0;
         createDots();
         update();
     });
-    
     createDots();
     update();
 }
@@ -404,32 +463,23 @@ function initInteriorSlider() {
     const prevBtn = document.getElementById('prevSlide');
     const nextBtn = document.getElementById('nextSlide');
     const dotsContainer = document.getElementById('sliderDots');
-    
     if (!slider || !prevBtn || !nextBtn) return;
-    
     const slides = slider.querySelectorAll('.slide');
     if (slides.length === 0) return;
-    
     let currentIndex = 0;
     const totalSlides = slides.length;
-    
     function updateSlider() {
         slider.style.transform = 'translateX(' + (-currentIndex * 100) + '%)';
         updateDots();
     }
-    
     function updateDots() {
         if (!dotsContainer) return;
         const dots = dotsContainer.querySelectorAll('.dot');
         for (let i = 0; i < dots.length; i++) {
-            if (i === currentIndex) {
-                dots[i].classList.add('active');
-            } else {
-                dots[i].classList.remove('active');
-            }
+            if (i === currentIndex) dots[i].classList.add('active');
+            else dots[i].classList.remove('active');
         }
     }
-    
     function createDots() {
         if (!dotsContainer) return;
         dotsContainer.innerHTML = '';
@@ -444,34 +494,25 @@ function initInteriorSlider() {
             dotsContainer.appendChild(dot);
         }
     }
-    
     prevBtn.onclick = function() {
         currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
         updateSlider();
     };
-    
     nextBtn.onclick = function() {
         currentIndex = (currentIndex + 1) % totalSlides;
         updateSlider();
     };
-    
     createDots();
     updateSlider();
-    
     let touchStartX = 0;
     slider.addEventListener('touchstart', function(e) {
         touchStartX = e.changedTouches[0].screenX;
     });
-    
     slider.addEventListener('touchend', function(e) {
         const touchEndX = e.changedTouches[0].screenX;
-        if (touchEndX < touchStartX - 50) {
-            currentIndex = (currentIndex + 1) % totalSlides;
-            updateSlider();
-        } else if (touchEndX > touchStartX + 50) {
-            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
-            updateSlider();
-        }
+        if (touchEndX < touchStartX - 50) currentIndex = (currentIndex + 1) % totalSlides;
+        else if (touchEndX > touchStartX + 50) currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+        updateSlider();
     });
 }
 
@@ -481,16 +522,11 @@ function initModalsClose() {
     for (let i = 0; i < closeButtons.length; i++) {
         closeButtons[i].onclick = function() {
             closeServicePhotoModal();
-            document.body.style.overflow = 'auto';
         };
     }
-    
     window.onclick = function(event) {
         const serviceModal = document.getElementById('servicePhotoModal');
-        if (event.target === serviceModal) {
-            closeServicePhotoModal();
-            document.body.style.overflow = 'auto';
-        }
+        if (event.target === serviceModal) closeServicePhotoModal();
     };
 }
 
@@ -499,39 +535,32 @@ function initReviewImageZoom() {
     const clickableImages = document.querySelectorAll('.review-img-clickable');
     const modal = document.getElementById('reviewPhotoModal');
     const modalImg = document.getElementById('reviewPhotoImg');
-    
     if (!modal || !modalImg) return;
-    
     function closeReviewPhotoModal() {
         modal.style.display = 'none';
         document.body.style.overflow = 'auto';
     }
-    
     for (let i = 0; i < clickableImages.length; i++) {
         clickableImages[i].onclick = function(e) {
             e.stopPropagation();
             const imgSrc = this.getAttribute('data-review-img');
             if (imgSrc) {
                 modalImg.src = imgSrc;
-                modal.style.display = 'block';
+                modal.style.display = 'flex';
+                modal.style.alignItems = 'center';
+                modal.style.justifyContent = 'center';
                 document.body.style.overflow = 'hidden';
             }
         };
     }
-    
     const closeBtn = document.querySelector('.close-review-photo');
-    if (closeBtn) {
-        closeBtn.onclick = closeReviewPhotoModal;
-    }
-    
+    if (closeBtn) closeBtn.onclick = closeReviewPhotoModal;
     window.onclick = function(event) {
-        if (event.target === modal) {
-            closeReviewPhotoModal();
-        }
+        if (event.target === modal) closeReviewPhotoModal();
     };
 }
 
-// ЗАПУСК ВСЕХ ФУНКЦИЙ
+// ЗАПУСК
 document.addEventListener('DOMContentLoaded', function() {
     initBurgerMenu();
     initSmoothScroll();
