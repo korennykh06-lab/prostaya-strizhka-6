@@ -51,14 +51,15 @@ function closeServicePhotoModal() {
     }
 }
 
-// БУРГЕР-МЕНЮ
+// БУРГЕР-МЕНЮ (НА ВЕСЬ ЭКРАН)
 function initBurgerMenu() {
     const burger = document.getElementById('burgerMenu');
     const nav = document.getElementById('navLinks');
     
     if (!burger || !nav) return;
     
-    burger.onclick = function() {
+    burger.onclick = function(e) {
+        e.stopPropagation();
         if (nav.classList.contains('active')) {
             nav.classList.remove('active');
             burger.classList.remove('active');
@@ -144,12 +145,24 @@ function initServiceButtons() {
     }
 }
 
-// СОВЕТЫ
+// СОВЕТЫ - МОДАЛЬНОЕ ОКНО
 const tipsData = {
-    1: { title: 'Как правильно выбрать расчёску?', content: '<p>Расчёска подбирается исходя из типа кожи головы, длины и толщины волос.</p><ul><li><strong>Массажная щётка</strong> — сочетает расчёсывание и массаж, подходит для всех типов волос.</li><li><strong>Гребень с редкими зубьями</strong> — для тонких и ломких волос.</li><li><strong>Расчёска с натуральной щетиной</strong> — для густых и вьющихся волос.</li><li><strong>Силиконовая расчёска</strong> — для мокрых волос, не травмирует.</li></ul><p>Деревянные расчёски лучше пластмассовых — они не электризуют волосы.</p>' },
-    2: { title: 'Как сохранить волосы здоровыми?', content: '<p>Чтобы волосы были здоровыми и красивыми, следуйте этим правилам:</p><ul><li>Принимайте витамины (группа B, цинк, железо, биотин)</li><li>Увлажняйте волосы масками 1-2 раза в неделю</li><li>Используйте индивидуальный уход под тип волос</li><li>Минимизируйте стресс и высыпайтесь</li><li>Пейте больше воды (1.5-2 литра в день)</li><li>Защищайте волосы от солнца и термовоздействия</li><li>Регулярно подстригайте секущиеся кончики</li></ul>' },
-    3: { title: 'Что портит наши волосы?', content: '<p>Основные факторы, разрушающие структуру волос:</p><ul><li><strong>Механическое воздействие</strong> — грубое расчёсывание, тугие резинки, жёсткие заколки</li><li><strong>Тепловое воздействие</strong> — утюжки, фены, плойки без термозащиты</li><li><strong>Химическое воздействие</strong> — частые окрашивания, химическая завивка</li><li><strong>Внешние факторы</strong> — UV-лучи, хлорированная вода, солёная вода в море</li><li><strong>Неправильное питание</strong> — дефицит витаминов и белка</li></ul>' },
-    4: { title: 'Как часто нужно стричь волосы?', content: '<p>Рекомендации по частоте стрижки:</p><ul><li><strong>Короткие стрижки</strong> (пикси, боб) — каждые 1.5-2 месяца для поддержания формы</li><li><strong>Средние волосы</strong> — раз в 3 месяца</li><li><strong>Длинные волосы</strong> — раз в 3-4 месяца подстригайте кончики, чтобы избежать сечения</li><li><strong>Окрашенные волосы</strong> — чаще, раз в 2-2.5 месяца</li><li><strong>Вьющиеся волосы</strong> — раз в 3-4 месяца</li></ul><p>Регулярная стрижка стимулирует рост волос и придаёт ухоженный вид.</p>' }
+    1: { 
+        title: 'Как правильно выбрать расчёску?', 
+        content: '<p>Расчёска подбирается исходя из типа кожи головы, длины и толщины волос.</p><ul><li><strong>Массажная щётка</strong> — сочетает расчёсывание и массаж, подходит для всех типов волос.</li><li><strong>Гребень с редкими зубьями</strong> — для тонких и ломких волос.</li><li><strong>Расчёска с натуральной щетиной</strong> — для густых и вьющихся волос.</li><li><strong>Силиконовая расчёска</strong> — для мокрых волос, не травмирует.</li></ul><p>Деревянные расчёски лучше пластмассовых — они не электризуют волосы.</p>' 
+    },
+    2: { 
+        title: 'Как сохранить волосы здоровыми?', 
+        content: '<p>Чтобы волосы были здоровыми и красивыми, следуйте этим правилам:</p><ul><li>Принимайте витамины (группа B, цинк, железо, биотин)</li><li>Увлажняйте волосы масками 1-2 раза в неделю</li><li>Используйте индивидуальный уход под тип волос</li><li>Минимизируйте стресс и высыпайтесь</li><li>Пейте больше воды (1.5-2 литра в день)</li><li>Защищайте волосы от солнца и термовоздействия</li><li>Регулярно подстригайте секущиеся кончики</li></ul>' 
+    },
+    3: { 
+        title: 'Что портит наши волосы?', 
+        content: '<p>Основные факторы, разрушающие структуру волос:</p><ul><li><strong>Механическое воздействие</strong> — грубое расчёсывание, тугие резинки, жёсткие заколки</li><li><strong>Тепловое воздействие</strong> — утюжки, фены, плойки без термозащиты</li><li><strong>Химическое воздействие</strong> — частые окрашивания, химическая завивка</li><li><strong>Внешние факторы</strong> — UV-лучи, хлорированная вода, солёная вода в море</li><li><strong>Неправильное питание</strong> — дефицит витаминов и белка</li></ul>' 
+    },
+    4: { 
+        title: 'Как часто нужно стричь волосы?', 
+        content: '<p>Рекомендации по частоте стрижки:</p><ul><li><strong>Короткие стрижки</strong> (пикси, боб) — каждые 1.5-2 месяца для поддержания формы</li><li><strong>Средние волосы</strong> — раз в 3 месяца</li><li><strong>Длинные волосы</strong> — раз в 3-4 месяца подстригайте кончики, чтобы избежать сечения</li><li><strong>Окрашенные волосы</strong> — чаще, раз в 2-2.5 месяца</li><li><strong>Вьющиеся волосы</strong> — раз в 3-4 месяца</li></ul><p>Регулярная стрижка стимулирует рост волос и придаёт ухоженный вид.</p>' 
+    }
 };
 
 function openGostTip(tipId) {
@@ -188,9 +201,17 @@ function initTipsButtons() {
     if (closeGost) {
         closeGost.onclick = closeGostModal;
     }
+    
+    // Закрытие по клику вне модального окна
+    window.onclick = function(event) {
+        const modal = document.getElementById('gostModal');
+        if (event.target === modal) {
+            closeGostModal();
+        }
+    };
 }
 
-// ФОРМА
+// ФОРМА ЗАПИСИ
 function initBookingForm() {
     const form = document.getElementById('booking-form');
     if (!form) return;
@@ -466,13 +487,8 @@ function initModalsClose() {
     
     window.onclick = function(event) {
         const serviceModal = document.getElementById('servicePhotoModal');
-        const gostModal = document.getElementById('gostModal');
         if (event.target === serviceModal) {
             closeServicePhotoModal();
-            document.body.style.overflow = 'auto';
-        }
-        if (event.target === gostModal) {
-            closeGostModal();
             document.body.style.overflow = 'auto';
         }
     };
@@ -515,7 +531,7 @@ function initReviewImageZoom() {
     };
 }
 
-// ЗАПУСК
+// ЗАПУСК ВСЕХ ФУНКЦИЙ
 document.addEventListener('DOMContentLoaded', function() {
     initBurgerMenu();
     initSmoothScroll();
