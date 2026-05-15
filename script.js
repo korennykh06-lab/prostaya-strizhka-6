@@ -1,3 +1,6 @@
+// ============ GOOGLE SHEETS URL ============
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwoci_UCI_9W_o1SgHrfxU814b7_zwylc94GXtznn4VtL1kTVv_iTR5ER181wTiTFZz0g/exec';
+
 // ============ ФОТО ДЛЯ УСЛУГ ============
 const servicePhotos = {
     simple_woman: 'https://i.pinimg.com/1200x/97/ea/3a/97ea3ab88d3586ba070665fddd8e0640.jpg',
@@ -20,29 +23,21 @@ const servicePhotos = {
     treatment: 'https://i.pinimg.com/1200x/9f/48/d9/9f48d9b47bc4cc686520ec8acc13fda3.jpg'
 };
 
-// ============ ОТКРЫТИЕ ФОТО УСЛУГИ ============
 function openServicePhoto(serviceId) {
     const modal = document.getElementById('servicePhotoModal');
     const title = document.getElementById('photoModalTitle');
     const img = document.getElementById('servicePhotoImg');
     const photoUrl = servicePhotos[serviceId];
-    
-    if (!photoUrl) {
-        alert('Фото временно недоступно');
-        return;
-    }
-    
+    if (!photoUrl) { alert('Фото временно недоступно'); return; }
     const btn = document.querySelector('.service-photo-btn[data-photo="' + serviceId + '"]');
     if (btn) {
         const serviceCard = btn.closest('.service-card');
         const serviceName = serviceCard.querySelector('.service-name').textContent;
         title.textContent = serviceName;
     }
-    
     img.src = photoUrl;
     modal.style.display = 'block';
     document.body.style.overflow = 'hidden';
-    
     const closeOnEscape = function(e) {
         if (e.key === 'Escape') {
             closeServicePhotoModal();
@@ -64,9 +59,7 @@ function closeServicePhotoModal() {
 function initBurgerMenu() {
     const burger = document.getElementById('burgerMenu');
     const nav = document.getElementById('navLinks');
-    
     if (!burger || !nav) return;
-    
     burger.onclick = function(e) {
         e.stopPropagation();
         if (nav.classList.contains('active')) {
@@ -81,7 +74,6 @@ function initBurgerMenu() {
             document.body.classList.add('menu-open');
         }
     };
-    
     const links = nav.querySelectorAll('a');
     for (let i = 0; i < links.length; i++) {
         links[i].onclick = function() {
@@ -93,7 +85,6 @@ function initBurgerMenu() {
     }
 }
 
-// ============ ПЛАВНЫЙ СКРОЛЛ ============
 function initSmoothScroll() {
     const links = document.querySelectorAll('a[href^="#"]');
     for (let i = 0; i < links.length; i++) {
@@ -109,7 +100,6 @@ function initSmoothScroll() {
     }
 }
 
-// ============ ЛОГОТИП ============
 function initLogoLink() {
     const logoLink = document.getElementById('logoLink');
     if (logoLink) {
@@ -120,7 +110,6 @@ function initLogoLink() {
     }
 }
 
-// ============ КНОПКИ УСЛУГ ============
 function initServiceButtons() {
     const detailButtons = document.querySelectorAll('.service-detail-btn');
     for (let i = 0; i < detailButtons.length; i++) {
@@ -128,7 +117,6 @@ function initServiceButtons() {
             e.preventDefault();
             const serviceCard = this.closest('.service-card');
             const detailsWrapper = serviceCard.querySelector('.service-details-wrapper');
-            
             if (detailsWrapper.style.display === 'none' || detailsWrapper.style.display === '') {
                 const allWrappers = document.querySelectorAll('.service-details-wrapper');
                 for (let j = 0; j < allWrappers.length; j++) {
@@ -144,7 +132,6 @@ function initServiceButtons() {
             }
         });
     }
-    
     const photoButtons = document.querySelectorAll('.service-photo-btn');
     for (let i = 0; i < photoButtons.length; i++) {
         photoButtons[i].addEventListener('click', function(e) {
@@ -156,24 +143,12 @@ function initServiceButtons() {
     }
 }
 
-// ============ СОВЕТЫ (МОДАЛЬНОЕ ОКНО) ============
+// ============ СОВЕТЫ ============
 const tipsData = {
-    1: { 
-        title: 'Как правильно выбрать расчёску?', 
-        content: '<p>Расчёска подбирается исходя из типа кожи головы, длины и толщины волос.</p><ul><li><strong>Массажная щётка</strong> — сочетает расчёсывание и массаж, подходит для всех типов волос.</li><li><strong>Гребень с редкими зубьями</strong> — для тонких и ломких волос.</li><li><strong>Расчёска с натуральной щетиной</strong> — для густых и вьющихся волос.</li><li><strong>Силиконовая расчёска</strong> — для мокрых волос, не травмирует.</li></ul><p>Деревянные расчёски лучше пластмассовых — они не электризуют волосы.</p>' 
-    },
-    2: { 
-        title: 'Как сохранить волосы здоровыми?', 
-        content: '<p>Чтобы волосы были здоровыми и красивыми, следуйте этим правилам:</p><ul><li>Принимайте витамины (группа B, цинк, железо, биотин)</li><li>Увлажняйте волосы масками 1-2 раза в неделю</li><li>Используйте индивидуальный уход под тип волос</li><li>Минимизируйте стресс и высыпайтесь</li><li>Пейте больше воды (1.5-2 литра в день)</li><li>Защищайте волосы от солнца и термовоздействия</li><li>Регулярно подстригайте секущиеся кончики</li></ul>' 
-    },
-    3: { 
-        title: 'Что портит наши волосы?', 
-        content: '<p>Основные факторы, разрушающие структуру волос:</p><ul><li><strong>Механическое воздействие</strong> — грубое расчёсывание, тугие резинки, жёсткие заколки</li><li><strong>Тепловое воздействие</strong> — утюжки, фены, плойки без термозащиты</li><li><strong>Химическое воздействие</strong> — частые окрашивания, химическая завивка</li><li><strong>Внешние факторы</strong> — UV-лучи, хлорированная вода, солёная вода в море</li><li><strong>Неправильное питание</strong> — дефицит витаминов и белка</li></ul>' 
-    },
-    4: { 
-        title: 'Как часто нужно стричь волосы?', 
-        content: '<p>Рекомендации по частоте стрижки:</p><ul><li><strong>Короткие стрижки</strong> (пикси, боб) — каждые 1.5-2 месяца для поддержания формы</li><li><strong>Средние волосы</strong> — раз в 3 месяца</li><li><strong>Длинные волосы</strong> — раз в 3-4 месяца подстригайте кончики, чтобы избежать сечения</li><li><strong>Окрашенные волосы</strong> — чаще, раз в 2-2.5 месяца</li><li><strong>Вьющиеся волосы</strong> — раз в 3-4 месяца</li></ul><p>Регулярная стрижка стимулирует рост волос и придаёт ухоженный вид.</p>' 
-    }
+    1: { title: 'Как правильно выбрать расчёску?', content: '<p>Расчёска подбирается исходя из типа кожи головы, длины и толщины волос.</p><ul><li><strong>Массажная щётка</strong> — сочетает расчёсывание и массаж, подходит для всех типов волос.</li><li><strong>Гребень с редкими зубьями</strong> — для тонких и ломких волос.</li><li><strong>Расчёска с натуральной щетиной</strong> — для густых и вьющихся волос.</li><li><strong>Силиконовая расчёска</strong> — для мокрых волос, не травмирует.</li></ul><p>Деревянные расчёски лучше пластмассовых — они не электризуют волосы.</p>' },
+    2: { title: 'Как сохранить волосы здоровыми?', content: '<p>Чтобы волосы были здоровыми и красивыми, следуйте этим правилам:</p><ul><li>Принимайте витамины (группа B, цинк, железо, биотин)</li><li>Увлажняйте волосы масками 1-2 раза в неделю</li><li>Используйте индивидуальный уход под тип волос</li><li>Минимизируйте стресс и высыпайтесь</li><li>Пейте больше воды (1.5-2 литра в день)</li><li>Защищайте волосы от солнца и термовоздействия</li><li>Регулярно подстригайте секущиеся кончики</li></ul>' },
+    3: { title: 'Что портит наши волосы?', content: '<p>Основные факторы, разрушающие структуру волос:</p><ul><li><strong>Механическое воздействие</strong> — грубое расчёсывание, тугие резинки, жёсткие заколки</li><li><strong>Тепловое воздействие</strong> — утюжки, фены, плойки без термозащиты</li><li><strong>Химическое воздействие</strong> — частые окрашивания, химическая завивка</li><li><strong>Внешние факторы</strong> — UV-лучи, хлорированная вода, солёная вода в море</li><li><strong>Неправильное питание</strong> — дефицит витаминов и белка</li></ul>' },
+    4: { title: 'Как часто нужно стричь волосы?', content: '<p>Рекомендации по частоте стрижки:</p><ul><li><strong>Короткие стрижки</strong> (пикси, боб) — каждые 1.5-2 месяца для поддержания формы</li><li><strong>Средние волосы</strong> — раз в 3 месяца</li><li><strong>Длинные волосы</strong> — раз в 3-4 месяца подстригайте кончики, чтобы избежать сечения</li><li><strong>Окрашенные волосы</strong> — чаще, раз в 2-2.5 месяца</li><li><strong>Вьющиеся волосы</strong> — раз в 3-4 месяца</li></ul><p>Регулярная стрижка стимулирует рост волос и придаёт ухоженный вид.</p>' }
 };
 
 function openGostTip(tipId) {
@@ -181,7 +156,6 @@ function openGostTip(tipId) {
     const modal = document.getElementById('gostModal');
     const title = document.getElementById('gostModalTitle');
     const body = document.getElementById('gostModalBody');
-    
     if (tip && modal) {
         title.textContent = tip.title;
         body.innerHTML = tip.content;
@@ -207,73 +181,155 @@ function initTipsButtons() {
             openGostTip(tipId);
         });
     }
-    
     const closeGost = document.querySelector('.close-gost');
-    if (closeGost) {
-        closeGost.onclick = closeGostModal;
-    }
-    
+    if (closeGost) closeGost.onclick = closeGostModal;
     window.onclick = function(event) {
         const modal = document.getElementById('gostModal');
-        if (event.target === modal) {
-            closeGostModal();
-        }
+        if (event.target === modal) closeGostModal();
     };
 }
 
-// ============ ОТПРАВКА В GOOGLE SHEETS ============
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz01c2iyjFLSkuggN_pRviSBev1rlHhmVM5WsUQG7Nb2wVKkMzdWMtys8vqOzslW-gfvQ/exec';
-
+// ============ GOOGLE SHEETS ============
 async function sendToGoogleSheets(bookingData) {
     try {
         await fetch(GOOGLE_SCRIPT_URL, {
             method: 'POST',
             mode: 'no-cors',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(bookingData)
         });
-        console.log('✅ Данные отправлены в Google Sheets');
+        console.log('✅ Данные отправлены');
         return true;
     } catch (error) {
-        console.error('❌ Ошибка отправки:', error);
+        console.error('❌ Ошибка:', error);
         return false;
     }
 }
 
-// ============ ФОРМА ЗАПИСИ ============
-let bookedSlots = JSON.parse(localStorage.getItem('bookedSlots')) || {};
-
-function saveBookedSlots() {
-    localStorage.setItem('bookedSlots', JSON.stringify(bookedSlots));
+async function fetchBookedSlots() {
+    try {
+        const response = await fetch(GOOGLE_SCRIPT_URL + '?action=getBookedSlots');
+        const data = await response.json();
+        if (data.success) {
+            localStorage.setItem('bookedSlots', JSON.stringify(data.slots));
+            return data.slots;
+        }
+    } catch (error) {
+        console.log('Использую локальные данные');
+    }
+    return JSON.parse(localStorage.getItem('bookedSlots')) || {};
 }
 
-function checkTimeSlot(date, time) {
-    const key = `${date}_${time}`;
-    return bookedSlots[key] === true;
+// ============ КАЛЕНДАРЬ ============
+let currentMonth = new Date();
+let selectedDate = null;
+let bookedSlots = {};
+const allTimeSlots = ['10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00', '19:30'];
+
+function formatDate(date) {
+    return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+}
+
+function isDateFullyBooked(dateStr) {
+    let bookedCount = 0;
+    for (const time of allTimeSlots) {
+        if (bookedSlots[`${dateStr}_${time}`]) bookedCount++;
+    }
+    return bookedCount >= allTimeSlots.length;
+}
+
+function isTimeInPast(dateStr, time) {
+    const today = formatDate(new Date());
+    if (dateStr !== today) return false;
+    const now = new Date();
+    const [hours, minutes] = time.split(':');
+    const timeDate = new Date();
+    timeDate.setHours(parseInt(hours), parseInt(minutes), 0);
+    return timeDate < now;
+}
+
+function renderCalendar() {
+    const calendarGrid = document.getElementById('calendarGrid');
+    if (!calendarGrid) return;
+    const year = currentMonth.getFullYear();
+    const month = currentMonth.getMonth();
+    const firstDay = new Date(year, month, 1);
+    const startDay = firstDay.getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    let html = '';
+    const weekdays = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
+    weekdays.forEach(day => { html += `<div class="calendar-day" style="font-weight: bold; background: #e8f4fd;">${day}</div>`; });
+    let startOffset = startDay === 0 ? 6 : startDay - 1;
+    for (let i = 0; i < startOffset; i++) html += `<div class="calendar-day disabled"></div>`;
+    for (let day = 1; day <= daysInMonth; day++) {
+        const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+        const isPast = new Date(year, month, day) < today;
+        const isFullyBooked = isDateFullyBooked(dateStr);
+        let additionalClass = '';
+        if (selectedDate === dateStr) additionalClass = 'selected';
+        else if (isPast) additionalClass = 'disabled';
+        else if (isFullyBooked) additionalClass = 'booked';
+        html += `<div class="calendar-day ${additionalClass}" data-date="${dateStr}">${day}</div>`;
+    }
+    calendarGrid.innerHTML = html;
+    document.querySelectorAll('.calendar-day[data-date]').forEach(el => {
+        el.addEventListener('click', () => {
+            const date = el.dataset.date;
+            if (!el.classList.contains('disabled') && !el.classList.contains('booked')) selectDate(date);
+        });
+    });
+}
+
+function selectDate(date) {
+    selectedDate = date;
+    document.getElementById('bookingDate').value = date;
+    renderCalendar();
+    renderTimeSlots();
+}
+
+function renderTimeSlots() {
+    const timeSlotsContainer = document.getElementById('timeSlots');
+    if (!timeSlotsContainer) return;
+    if (!selectedDate) {
+        timeSlotsContainer.innerHTML = '<div style="grid-column:1/-1; text-align:center; color:#999;">Сначала выберите дату</div>';
+        return;
+    }
+    let html = '';
+    for (const time of allTimeSlots) {
+        const isBooked = bookedSlots[`${selectedDate}_${time}`];
+        const isPast = isTimeInPast(selectedDate, time);
+        let additionalClass = '';
+        if (isBooked || isPast) additionalClass = 'booked';
+        html += `<div class="time-slot ${additionalClass}" data-time="${time}" ${(isBooked || isPast) ? 'disabled' : ''}>${time}</div>`;
+    }
+    timeSlotsContainer.innerHTML = html;
+    document.querySelectorAll('.time-slot:not(.booked)').forEach(el => {
+        el.addEventListener('click', () => {
+            document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+            el.classList.add('selected');
+            document.getElementById('bookingTime').value = el.dataset.time;
+            updateTimeSlotStatus();
+        });
+    });
 }
 
 function updateTimeSlotStatus() {
     const dateInput = document.getElementById('bookingDate');
-    const timeSelect = document.getElementById('bookingTime');
+    const timeInput = document.getElementById('bookingTime');
     const statusDiv = document.getElementById('timeSlotStatus');
     const submitBtn = document.getElementById('submitBtn');
-    
-    if (!dateInput || !timeSelect || !statusDiv || !submitBtn) return;
-    
-    const selectedDate = dateInput.value;
-    const selectedTime = timeSelect.value;
-    
-    if (!selectedDate || !selectedTime) {
+    if (!dateInput || !timeInput || !statusDiv || !submitBtn) return;
+    const selectedDateVal = dateInput.value;
+    const selectedTimeVal = timeInput.value;
+    if (!selectedDateVal || !selectedTimeVal) {
         statusDiv.style.display = 'none';
         submitBtn.disabled = false;
         submitBtn.classList.remove('disabled');
         return;
     }
-    
-    const isBooked = checkTimeSlot(selectedDate, selectedTime);
-    
+    const isBooked = bookedSlots[`${selectedDateVal}_${selectedTimeVal}`];
     if (isBooked) {
         statusDiv.innerHTML = '❌ Это время уже занято. Пожалуйста, выберите другое время.';
         statusDiv.className = 'time-slot-status booked';
@@ -289,6 +345,14 @@ function updateTimeSlotStatus() {
     }
 }
 
+function changeMonth(delta) {
+    currentMonth.setMonth(currentMonth.getMonth() + delta);
+    renderCalendar();
+    const monthNames = ['январь', 'февраль', 'март', 'апрель', 'май', 'июнь', 'июль', 'август', 'сентябрь', 'октябрь', 'ноябрь', 'декабрь'];
+    document.getElementById('currentMonthYear').textContent = `${monthNames[currentMonth.getMonth()]} ${currentMonth.getFullYear()}`;
+}
+
+// ============ ФОРМА ЗАПИСИ (БЕЗ EMAIL) ============
 function initBookingForm() {
     const form = document.getElementById('booking-form');
     if (!form) return;
@@ -296,33 +360,29 @@ function initBookingForm() {
     const nameInput = document.getElementById('userName');
     const phoneInput = document.getElementById('userPhone');
     const dateInput = document.getElementById('bookingDate');
-    const timeSelect = document.getElementById('bookingTime');
+    const timeInput = document.getElementById('bookingTime');
     const commentTextarea = document.querySelector('#booking-form textarea');
     
-    if (dateInput) {
-        const today = new Date().toISOString().split('T')[0];
-        dateInput.min = today;
-        const maxDate = new Date();
-        maxDate.setDate(maxDate.getDate() + 30);
-        dateInput.max = maxDate.toISOString().split('T')[0];
+    if (document.getElementById('currentMonthYear')) {
+        const monthNames = ['январь', 'февраль', 'март', 'апрель', 'май', 'июнь', 'июль', 'август', 'сентябрь', 'октябрь', 'ноябрь', 'декабрь'];
+        document.getElementById('currentMonthYear').textContent = `${monthNames[currentMonth.getMonth()]} ${currentMonth.getFullYear()}`;
     }
+    const prevBtn = document.getElementById('prevMonthBtn');
+    const nextBtn = document.getElementById('nextMonthBtn');
+    if (prevBtn) prevBtn.onclick = () => changeMonth(-1);
+    if (nextBtn) nextBtn.onclick = () => changeMonth(1);
     
-    if (dateInput) dateInput.addEventListener('change', updateTimeSlotStatus);
-    if (timeSelect) timeSelect.addEventListener('change', updateTimeSlotStatus);
+    fetchBookedSlots().then(slots => { bookedSlots = slots; renderCalendar(); });
     
     if (nameInput) {
         nameInput.addEventListener('input', function() {
             this.value = this.value.replace(/[^a-zA-Zа-яА-ЯёЁ\s\-]/g, '');
         });
     }
-    
     if (phoneInput) {
-        phoneInput.addEventListener('input', function(e) {
+        phoneInput.addEventListener('input', function() {
             let value = this.value.replace(/\D/g, '');
-            if (value.length === 0) {
-                this.value = '+7';
-                return;
-            }
+            if (value.length === 0) { this.value = '+7'; return; }
             if (!value.startsWith('7')) value = '7' + value;
             if (value.length > 11) value = value.substring(0, 11);
             let formatted = '+7';
@@ -340,87 +400,49 @@ function initBookingForm() {
     form.addEventListener('submit', async function(e) {
         e.preventDefault();
         
-        let isValid = true;
-        let errorMessage = '';
-        
         const name = nameInput ? nameInput.value.trim() : '';
-        if (!name) {
-            errorMessage += '• Введите имя\n';
-            isValid = false;
-        } else if (/[0-9]/.test(name)) {
-            errorMessage += '• Имя не должно содержать цифры\n';
-            isValid = false;
-        }
-        
         const phone = phoneInput ? phoneInput.value.trim() : '';
-        const phoneDigits = phone.replace(/\D/g, '');
-        if (!phone || phoneDigits.length !== 11 || !phoneDigits.startsWith('7')) {
-            errorMessage += '• Введите корректный номер телефона (+7 XXX XXX XX XX)\n';
-            isValid = false;
-        }
-        
-        const selectedDate = dateInput ? dateInput.value : '';
-        if (!selectedDate) {
-            errorMessage += '• Выберите дату\n';
-            isValid = false;
-        }
-        
-        const selectedTime = timeSelect ? timeSelect.value : '';
-        if (!selectedTime) {
-            errorMessage += '• Выберите время\n';
-            isValid = false;
-        }
-        
+        const selectedDateVal = dateInput ? dateInput.value : '';
+        const selectedTimeVal = timeInput ? timeInput.value : '';
         const serviceSelect = document.getElementById('userService');
         const selectedService = serviceSelect ? serviceSelect.options[serviceSelect.selectedIndex]?.text : '';
-        if (!selectedService) {
-            errorMessage += '• Выберите услугу\n';
-            isValid = false;
-        }
-        
         const comment = commentTextarea ? commentTextarea.value : '';
         
-        if (isValid && selectedDate && selectedTime && checkTimeSlot(selectedDate, selectedTime)) {
-            errorMessage += '• Выбранное время уже занято. Пожалуйста, выберите другое время.\n';
-            isValid = false;
+        if (!name) { alert('Введите имя'); return; }
+        if (!phone || phone.replace(/\D/g, '').length !== 11) { alert('Введите корректный номер телефона (+7 XXX XXX XX XX)'); return; }
+        if (!selectedDateVal) { alert('Выберите дату'); return; }
+        if (!selectedTimeVal) { alert('Выберите время'); return; }
+        if (!selectedService) { alert('Выберите услугу'); return; }
+        
+        if (bookedSlots[`${selectedDateVal}_${selectedTimeVal}`]) {
+            alert('Это время уже занято. Пожалуйста, выберите другое время.');
+            return;
         }
         
-        if (isValid) {
-            // Отправляем в Google Sheets
-            const bookingData = {
-                date: selectedDate,
-                time: selectedTime,
-                name: name,
-                phone: phone,
-                service: selectedService,
-                comment: comment
-            };
-            await sendToGoogleSheets(bookingData);
-            
-            // Сохраняем в localStorage
-            const key = `${selectedDate}_${selectedTime}`;
-            bookedSlots[key] = true;
-            saveBookedSlots();
-            
-            const formattedDate = new Date(selectedDate).toLocaleDateString('ru-RU', {
-                day: 'numeric', month: 'long', year: 'numeric'
-            });
-            
-            alert('Спасибо, ' + name + '!\n\nВы записаны на:\n📅 ' + formattedDate + '\n⏰ ' + selectedTime + '\n💇 ' + selectedService + '\n\nМы свяжемся с вами в ближайшее время.');
-            
-            form.reset();
-            if (phoneInput) phoneInput.value = '+7 ';
-            if (dateInput) dateInput.value = '';
-            if (timeSelect) timeSelect.value = '';
-            const statusDiv = document.getElementById('timeSlotStatus');
-            if (statusDiv) statusDiv.style.display = 'none';
-        } else {
-            alert('Пожалуйста, исправьте ошибки:\n' + errorMessage);
-        }
+        const bookingData = { date: selectedDateVal, time: selectedTimeVal, name, phone, service: selectedService, comment };
+        await sendToGoogleSheets(bookingData);
+        
+        bookedSlots[`${selectedDateVal}_${selectedTimeVal}`] = true;
+        localStorage.setItem('bookedSlots', JSON.stringify(bookedSlots));
+        
+        const formattedDate = new Date(selectedDateVal).toLocaleDateString('ru-RU', {
+            day: 'numeric', month: 'long', year: 'numeric'
+        });
+        
+        alert(`Спасибо, ${name}!\n\nВы записаны на:\n📅 ${formattedDate}\n⏰ ${selectedTimeVal}\n💇 ${selectedService}\n\nЖдём вас!`);
+        
+        form.reset();
+        if (phoneInput) phoneInput.value = '+7 ';
+        selectedDate = null;
+        if (dateInput) dateInput.value = '';
+        if (timeInput) timeInput.value = '';
+        renderCalendar();
+        renderTimeSlots();
+        const statusDiv = document.getElementById('timeSlotStatus');
+        if (statusDiv) statusDiv.style.display = 'none';
     });
 }
 
-// ============ ШАПКА ПРИ СКРОЛЛЕ ============
 function initHeaderVisibility() {
     const header = document.getElementById('mainHeader');
     if (!header) return;
@@ -438,7 +460,6 @@ function initHeaderVisibility() {
     });
 }
 
-// ============ СЛАЙДЕР ОТЗЫВОВ ============
 function initReviewsSlider() {
     const track = document.getElementById('reviewsTrack');
     const prev = document.getElementById('prevReviewBtn');
@@ -480,25 +501,12 @@ function initReviewsSlider() {
             dotsContainer.appendChild(dot);
         }
     }
-    prev.onclick = function() {
-        current = current - visible >= 0 ? current - visible : Math.max(0, cards.length - visible);
-        update();
-    };
-    next.onclick = function() {
-        current = current + visible < cards.length ? current + visible : 0;
-        update();
-    };
-    window.addEventListener('resize', function() {
-        visible = window.innerWidth <= 768 ? 1 : 2;
-        current = 0;
-        createDots();
-        update();
-    });
-    createDots();
-    update();
+    prev.onclick = function() { current = current - visible >= 0 ? current - visible : Math.max(0, cards.length - visible); update(); };
+    next.onclick = function() { current = current + visible < cards.length ? current + visible : 0; update(); };
+    window.addEventListener('resize', function() { visible = window.innerWidth <= 768 ? 1 : 2; current = 0; createDots(); update(); });
+    createDots(); update();
 }
 
-// ============ СЛАЙДЕР ИНТЕРЬЕРА ============
 function initInteriorSlider() {
     const slider = document.getElementById('interiorSlider');
     const prevBtn = document.getElementById('prevSlide');
@@ -509,10 +517,7 @@ function initInteriorSlider() {
     if (slides.length === 0) return;
     let currentIndex = 0;
     const totalSlides = slides.length;
-    function updateSlider() {
-        slider.style.transform = 'translateX(' + (-currentIndex * 100) + '%)';
-        updateDots();
-    }
+    function updateSlider() { slider.style.transform = 'translateX(' + (-currentIndex * 100) + '%)'; updateDots(); }
     function updateDots() {
         if (!dotsContainer) return;
         const dots = dotsContainer.querySelectorAll('.dot');
@@ -528,27 +533,15 @@ function initInteriorSlider() {
             const dot = document.createElement('div');
             dot.classList.add('dot');
             if (i === 0) dot.classList.add('active');
-            dot.addEventListener('click', function() {
-                currentIndex = i;
-                updateSlider();
-            });
+            dot.addEventListener('click', function() { currentIndex = i; updateSlider(); });
             dotsContainer.appendChild(dot);
         }
     }
-    prevBtn.onclick = function() {
-        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
-        updateSlider();
-    };
-    nextBtn.onclick = function() {
-        currentIndex = (currentIndex + 1) % totalSlides;
-        updateSlider();
-    };
-    createDots();
-    updateSlider();
+    prevBtn.onclick = function() { currentIndex = (currentIndex - 1 + totalSlides) % totalSlides; updateSlider(); };
+    nextBtn.onclick = function() { currentIndex = (currentIndex + 1) % totalSlides; updateSlider(); };
+    createDots(); updateSlider();
     let touchStartX = 0;
-    slider.addEventListener('touchstart', function(e) {
-        touchStartX = e.changedTouches[0].screenX;
-    });
+    slider.addEventListener('touchstart', function(e) { touchStartX = e.changedTouches[0].screenX; });
     slider.addEventListener('touchend', function(e) {
         const touchEndX = e.changedTouches[0].screenX;
         if (touchEndX < touchStartX - 50) currentIndex = (currentIndex + 1) % totalSlides;
@@ -557,49 +550,30 @@ function initInteriorSlider() {
     });
 }
 
-// ============ МОДАЛЬНЫЕ ОКНА ============
 function initModalsClose() {
     const closeButtons = document.querySelectorAll('.close-photo');
-    for (let i = 0; i < closeButtons.length; i++) {
-        closeButtons[i].onclick = function() {
-            closeServicePhotoModal();
-        };
-    }
-    window.onclick = function(event) {
-        const serviceModal = document.getElementById('servicePhotoModal');
-        if (event.target === serviceModal) closeServicePhotoModal();
-    };
+    for (let i = 0; i < closeButtons.length; i++) { closeButtons[i].onclick = function() { closeServicePhotoModal(); }; }
+    window.onclick = function(event) { const serviceModal = document.getElementById('servicePhotoModal'); if (event.target === serviceModal) closeServicePhotoModal(); };
 }
 
-// ============ УВЕЛИЧЕНИЕ ФОТО ОТЗЫВОВ ============
 function initReviewImageZoom() {
     const clickableImages = document.querySelectorAll('.review-img-clickable');
     const modal = document.getElementById('reviewPhotoModal');
     const modalImg = document.getElementById('reviewPhotoImg');
     if (!modal || !modalImg) return;
-    function closeReviewPhotoModal() {
-        modal.style.display = 'none';
-        document.body.style.overflow = 'auto';
-    }
+    function closeReviewPhotoModal() { modal.style.display = 'none'; document.body.style.overflow = 'auto'; }
     for (let i = 0; i < clickableImages.length; i++) {
         clickableImages[i].onclick = function(e) {
             e.stopPropagation();
             const imgSrc = this.getAttribute('data-review-img');
-            if (imgSrc) {
-                modalImg.src = imgSrc;
-                modal.style.display = 'block';
-                document.body.style.overflow = 'hidden';
-            }
+            if (imgSrc) { modalImg.src = imgSrc; modal.style.display = 'block'; document.body.style.overflow = 'hidden'; }
         };
     }
     const closeBtn = document.querySelector('.close-review-photo');
     if (closeBtn) closeBtn.onclick = closeReviewPhotoModal;
-    window.onclick = function(event) {
-        if (event.target === modal) closeReviewPhotoModal();
-    };
+    window.onclick = function(event) { if (event.target === modal) closeReviewPhotoModal(); };
 }
 
-// ============ ЗАПУСК ВСЕХ ФУНКЦИЙ ============
 document.addEventListener('DOMContentLoaded', function() {
     initBurgerMenu();
     initSmoothScroll();
