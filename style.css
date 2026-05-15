@@ -270,7 +270,7 @@ header.scrolled .burger-menu span {
     gap: 12px;
 }
 
-/* БУРГЕР-МЕНЮ - ИСПРАВЛЕН КРЕСТИК */
+/* БУРГЕР-МЕНЮ */
 .burger-menu {
     display: none;
     flex-direction: column;
@@ -287,7 +287,6 @@ header.scrolled .burger-menu span {
     border-radius: 2px;
 }
 
-/* При активном состоянии бургера — превращаем полоски в ровный крест */
 .burger-menu.active span:nth-child(1) {
     transform: rotate(45deg) translate(8px, 8px);
 }
@@ -296,14 +295,6 @@ header.scrolled .burger-menu span {
 }
 .burger-menu.active span:nth-child(3) {
     transform: rotate(-45deg) translate(8px, -8px);
-}
-
-/* На телефоне при активном бургере — фиксируем позицию */
-.burger-menu.active {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 1001;
 }
 
 header.scrolled .burger-menu span {
@@ -1113,7 +1104,6 @@ header.scrolled .nav-links a:hover {
     }
 }
 
-/* МОДАЛЬНОЕ ОКНО ДЛЯ ФОТО - ПО ЦЕНТРУ, БЕЗ ЗАДЕРЖЕК */
 .photo-modal-content {
     background: rgba(0,0,0,0.95);
     border-radius: 20px;
@@ -1441,6 +1431,125 @@ header.scrolled .nav-links a:hover {
     border-radius: 4px;
 }
 
+/* КАЛЕНДАРЬ ЗАНЯТОСТИ */
+.calendar-container {
+    margin: 20px 0;
+    padding: 15px;
+    background: #f9f9f9;
+    border-radius: 20px;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.calendar-nav {
+    background: #5BA4CF;
+    border: none;
+    color: white;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+    transition: all 0.2s;
+}
+
+.calendar-nav:hover {
+    background: #4A8AB0;
+    transform: scale(1.05);
+}
+
+#currentMonthYear {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #2A2A2A;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+    margin: 15px 0;
+}
+
+.calendar-day {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+    background: white;
+    border: 1px solid #e0e0e0;
+}
+
+.calendar-day:hover {
+    transform: scale(1.05);
+}
+
+.calendar-day.selected {
+    background: #5BA4CF;
+    color: white;
+    border-color: #5BA4CF;
+}
+
+.calendar-day.booked {
+    background: #ffebee;
+    color: #c62828;
+    text-decoration: line-through;
+    cursor: not-allowed;
+}
+
+.calendar-day.disabled {
+    background: #f0f0f0;
+    color: #ccc;
+    cursor: not-allowed;
+}
+
+.calendar-day.weekend {
+    background: #fff3e0;
+}
+
+.time-slots {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.time-slot {
+    padding: 8px 16px;
+    background: white;
+    border: 1px solid #5BA4CF;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 14px;
+}
+
+.time-slot:hover {
+    background: #e8f4fd;
+}
+
+.time-slot.selected {
+    background: #5BA4CF;
+    color: white;
+}
+
+.time-slot.booked {
+    background: #ffebee;
+    color: #c62828;
+    border-color: #ffcdd2;
+    text-decoration: line-through;
+    cursor: not-allowed;
+}
+
 /* ФОРМА ЗАПИСИ */
 .contact-form-section {
     padding: 60px 0;
@@ -1661,7 +1770,6 @@ form input:focus, form select:focus, form textarea:focus {
         font-size: 1.2rem;
     }
     
-    /* БУРГЕР-МЕНЮ НА ТЕЛЕФОНЕ */
     .burger-menu {
         display: flex;
     }
@@ -1711,6 +1819,17 @@ form input:focus, form select:focus, form textarea:focus {
     
     body.menu-open {
         overflow: hidden;
+    }
+    
+    .burger-menu.active {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1001;
+    }
+    
+    .burger-menu.active span {
+        background: white;
     }
     
     .logo-img {
@@ -1829,6 +1948,15 @@ form input:focus, form select:focus, form textarea:focus {
     
     .photo-modal-content .modal-header h2 {
         font-size: 1.2rem;
+    }
+    
+    .calendar-day {
+        font-size: 12px;
+    }
+    
+    .time-slot {
+        padding: 6px 12px;
+        font-size: 12px;
     }
     
     #bookingDate, #bookingTime {
