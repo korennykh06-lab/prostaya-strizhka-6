@@ -2011,3 +2011,107 @@ form input:focus, form select:focus, form textarea:focus {
         min-height: 50vh;
     }
 }
+/* ===== АДАПТАЦИЯ КАЛЕНДАРЯ ДЛЯ ТЕЛЕФОНА ===== */
+@media (max-width: 768px) {
+    .calendar-container {
+        padding: 10px;
+        margin: 15px 0;
+    }
+    
+    .calendar-header {
+        gap: 10px;
+    }
+    
+    .calendar-nav {
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
+    }
+    
+    #currentMonthYear {
+        font-size: 14px;
+    }
+    
+    .calendar-grid {
+        gap: 4px;
+        margin: 10px 0;
+    }
+    
+    .calendar-day {
+        font-size: 11px;
+        border-radius: 8px;
+    }
+    
+    .time-slots {
+        gap: 8px;
+        margin-top: 12px;
+    }
+    
+    .time-slot {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+    
+    /* Форма записи на телефоне */
+    .booking-wrapper {
+        max-width: 100%;
+        padding: 0;
+    }
+    
+    form {
+        padding: 20px;
+    }
+    
+    form h3 {
+        font-size: 1.3rem;
+        text-align: center;
+    }
+    
+    form input, form select, form textarea {
+        font-size: 14px;
+        padding: 10px 0;
+    }
+    
+    /* Селект услуги на телефоне */
+    #userService {
+        font-size: 13px;
+        min-height: 200px;
+    }
+    
+    #userService option {
+        padding: 8px;
+    }
+    
+    /* Кнопка отправки */
+    .btn {
+        width: 100%;
+        padding: 12px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .calendar-grid {
+        gap: 3px;
+    }
+    
+    .calendar-day {
+        font-size: 10px;
+        border-radius: 6px;
+    }
+    
+    .time-slot {
+        padding: 5px 10px;
+        font-size: 11px;
+    }
+    
+    .calendar-nav {
+        width: 28px;
+        height: 28px;
+        font-size: 12px;
+    }
+    
+    #currentMonthYear {
+        font-size: 12px;
+    }
+}
